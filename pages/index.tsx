@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Poppins } from 'next/font/google';
-import { FaTshirt, FaBook, FaUsers, FaHeartbeat } from 'react-icons/fa';
+import { FaTshirt, FaBook, FaUsers, FaHeartbeat, FaBuilding } from 'react-icons/fa';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -12,7 +12,7 @@ export default function Home() {
     <main className={`bg-[#f9f8ff] text-[#1d1d1f] ${poppins.className}`}>
       {/* Header */}
       <header className="flex items-center justify-between px-10 py-6 bg-white shadow-sm relative">
-          <div className="text-xl font-semibold text-purple-700">Hug Foundation</div>
+        <div className="text-xl font-semibold text-purple-700">HUG Foundation</div>
         <nav className="flex gap-6 text-sm items-center z-10">
           <a href="#about" className="hover:underline">About</a>
           <a href="#programs" className="hover:underline">Programs</a>
@@ -23,8 +23,10 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative flex flex-col lg:flex-row items-center justify-between px-10 py-20">
+      <section className="relative flex flex-col lg:flex-row items-center justify-between px-6 md:px-10 lg:px-20 py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-100 via-transparent to-transparent pointer-events-none"></div>
+
+        {/* Text Block */}
         <div className="max-w-xl relative z-10">
           <div className="inline-block px-3 py-1 bg-purple-100 text-purple-600 font-medium rounded-full text-sm mb-3 shadow relative">
             <span className="relative z-10">501(c)(3) Non-Profit Organization</span>
@@ -45,64 +47,99 @@ export default function Home() {
             <button className="border border-purple-600 text-purple-600 px-6 py-2 rounded-md">Learn More</button>
           </div>
         </div>
-        <div className="mt-10 lg:mt-0 relative z-10">
-          <div className="absolute -top-6 -left-6 w-full h-full bg-purple-100 rounded-xl z-0"></div>
-          <Image src="/219135b4-4bb6-48fe-8b79-184c08f87a0f.png" alt="Hug Logo" width={300} height={300} className="rounded-lg relative z-10 shadow-lg" />
+
+        {/* Logo Image Block */}
+        <div className="mt-10 lg:mt-0 relative z-10 flex justify-center lg:justify-end w-full lg:w-[40%]">
+          <div className="relative">
+            <div className="absolute -top-4 -left-4 w-full h-full bg-purple-100 rounded-xl z-0" />
+            <Image
+              src="/HUGlogo.png"
+              alt="HUG Logo"
+              width={500}
+              height={500}
+              className="relative z-10 rounded-lg shadow-lg w-[340px] sm:w-[380px] md:w-[420px] lg:w-[480px] xl:w-[520px]"
+            />
+          </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="flex justify-around text-center py-14 bg-[#f9f8ff] text-purple-700 font-semibold text-2xl">
-        <div>
-          <p>150+</p>
-          <p className="text-base text-gray-500">Active Volunteers</p>
-        </div>
-        <div>
-          <p>1k+</p>
-          <p className="text-base text-gray-500">Total Donations</p>
-        </div>
-        <div>
-          <p>2</p>
-          <p className="text-base text-gray-500">Community Programs</p>
-        </div>
-        <div>
-          <p>EST'24</p>
-          <p className="text-base text-gray-500">Established</p>
-        </div>
-      </section>
+      <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 md:px-20 py-14 bg-[#f9f8ff] text-center text-purple-700 font-semibold">
+      <div>
+        <p className="text-3xl">150+</p>
+        <p className="text-sm text-gray-500">Active Volunteers</p>
+      </div>
+      <div>
+        <p className="text-3xl">1k+</p>
+        <p className="text-sm text-gray-500">Total Donations</p>
+      </div>
+      <div>
+        <p className="text-3xl">2</p>
+        <p className="text-sm text-gray-500">Community Programs</p>
+      </div>
+      <div>
+        <p className="text-3xl">EST'24</p>
+        <p className="text-sm text-gray-500">Established</p>
+      </div>
+    </section>
 
       {/* About Section */}
-      <section id="about" className="px-10 py-20 bg-[#f9f8ff]">
-        <h2 className="text-3xl font-bold text-center mb-6">About <span className="text-purple-700">Hug Foundation</span></h2>
-        <p className="text-center max-w-2xl mx-auto mb-12 text-gray-600">
-          A 501(c)(3) non-profit dedicated to supporting underserved communities through educational empowerment, wellness programs, and compassionate outreach.
+      <section id="about" className="px-6 md:px-20 py-20 bg-white text-[#1d1d1f]">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+          About <span className="text-purple-700">HUG Foundation</span>
+        </h2>
+        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+          A distinguished 501(c)(3) non-profit organization devoted to empowering underserved communities through education, wellness, and compassionate outreach.
         </p>
-        <div className="grid md:grid-cols-2 gap-10">
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Left Column */}
           <div>
-            <h3 className="font-semibold text-lg text-purple-700 mb-2">Our Mission</h3>
-            <p className="text-gray-600 mb-6">
-              At Hug Foundation, we champion excellence, empathy, and empowerment—building brighter futures, one hug at a time.
+            <h3 className="text-lg font-semibold mb-2">Our Mission</h3>
+            <p className="text-gray-600 mb-8">
+              At HUG Foundation, we are committed to fostering a culture of excellence, generosity, and human connection, building a brighter future one HUG at a time.
             </p>
-            <h3 className="font-semibold text-lg text-purple-700 mb-2">Our Values</h3>
-            <ul className="text-gray-600 space-y-2 list-disc list-inside">
-              <li>Compassionate Service – Empathy and care in every action</li>
-              <li>Inclusive Community – Welcoming all voices and stories</li>
-              <li>Leadership Development – Shaping the leaders of tomorrow</li>
-              <li>Sustainable Impact – Creating meaningful, lasting change</li>
+
+            <h3 className="text-lg font-semibold mb-3">Our Values</h3>
+            <ul className="space-y-4 text-gray-700">
+              <li className="flex items-start gap-2">
+                <span className="text-purple-600 text-xl">✔</span>
+                <span><strong>Compassionate Service</strong> - Approaching every interaction with empathy and care</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-600 text-xl">✔</span>
+                <span><strong>Inclusive Community</strong> - Creating spaces where everyone feels valued and welcome</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-600 text-xl">✔</span>
+                <span><strong>Leadership Development</strong> - Empowering students to become tomorrow’s leaders</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-600 text-xl">✔</span>
+                <span><strong>Sustainable Impact</strong> - Making lasting differences in the communities we serve</span>
+              </li>
             </ul>
           </div>
-          <div className="space-y-4">
-            <div className="p-4 bg-purple-100 rounded-md shadow">
-              <h4 className="font-semibold">Student Volunteers</h4>
-              <p className="text-gray-600">Empowering youth leaders with opportunities that build character and enrich lives.</p>
+
+          {/* Right Column */}
+          <div className="space-y-6">
+            <div className="p-6 bg-[#f4f2fd] rounded-lg shadow-sm">
+              <h4 className="text-md font-semibold text-purple-700 mb-1">Student Volunteers</h4>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                We proudly engage student volunteers, providing leadership opportunities that make a lasting difference in both their lives and the communities they serve.
+              </p>
             </div>
-            <div className="p-4 bg-purple-100 rounded-md shadow">
-              <h4 className="font-semibold">Community Impact</h4>
-              <p className="text-gray-600">Supporting communities through accessible, compassionate programming tailored to their needs.</p>
+            <div className="p-6 bg-[#f4f2fd] rounded-lg shadow-sm">
+              <h4 className="text-md font-semibold text-purple-700 mb-1">Community Impact</h4>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                Our programs directly address the needs of underserved communities, providing essential resources, educational support, and wellness initiatives.
+              </p>
             </div>
-            <div className="p-4 bg-purple-100 rounded-md shadow">
-              <h4 className="font-semibold">Holistic Approach</h4>
-              <p className="text-gray-600">Uplifting individuals by addressing physical, emotional, and educational well-being.</p>
+            <div className="p-6 bg-[#f4f2fd] rounded-lg shadow-sm">
+              <h4 className="text-md font-semibold text-purple-700 mb-1">Holistic Approach</h4>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                We believe in addressing the whole person – their educational needs, physical well-being, and emotional support – creating comprehensive solutions.
+              </p>
             </div>
           </div>
         </div>
@@ -146,6 +183,47 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Partners Section */}
+<section className="bg-[#f9f8ff] px-6 md:px-20 py-20">
+  <h2 className="text-3xl font-bold text-center mb-3">
+    Our <span className="text-purple-700">Partners</span>
+  </h2>
+  <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+    Working together with community organizations to create lasting impact in Henderson and the greater Las Vegas area.
+  </p>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {/* Vegas Stronger */}
+    <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
+  <div className="flex items-start gap-3 mb-3">
+    <div className="p-3 bg-purple-100 rounded-full">
+      <FaBuilding className="w-6 h-6 text-purple-600" />
+    </div>
+    <h3 className="text-lg font-semibold">Vegas Stronger</h3>
+  </div>
+  <p className="text-gray-600 mb-4">
+    Collaborating to strengthen our community through unified efforts and shared resources, making Las Vegas a better place for everyone.
+  </p>
+  <a href="#" className="text-purple-600 font-medium text-sm hover:underline">
+    Learn more about our partnership →
+  </a>
+</div>
+
+    {/* Become a Partner */}
+    <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
+      <div className="flex items-start gap-3 mb-3">
+        <div className="p-3 bg-purple-100 rounded-full">
+          <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h3 className="text-lg font-semibold">Become a Partner</h3>
+      </div>
+      <p className="text-gray-600 mb-4">
+        We're always looking to collaborate with organizations that share our vision for a stronger, more inclusive community in Henderson and beyond.
+      </p>
+      <a href="#" className="text-purple-600 font-medium text-sm hover:underline">Get in touch →</a>
+    </div>
+  </div>
+</section>
     </main>
   );
 }
