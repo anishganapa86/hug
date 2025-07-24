@@ -9,8 +9,8 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import VolunteerSection from "@/components/applications&contact";
 
 const poppins = Poppins({
@@ -20,8 +20,43 @@ const poppins = Poppins({
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const volunteerRef = useRef<HTMLElement>(null);
+
+  // For header visibility on scroll
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 50) {
+        // Always show header near top
+        setShowHeader(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        // Scrolling down
+        setShowHeader(false);
+      } else {
+        // Scrolling up
+        setShowHeader(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   function scrollToId(id: string) {
+    if (id === "volunteer") {
+      if (volunteerRef.current) {
+        volunteerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      return;
+    }
+
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -30,88 +65,104 @@ export default function Home() {
 
   return (
     <main className={`bg-[#f9f8ff] text-[#1d1d1f] ${poppins.className}`}>
-      {/* Header */}
-      <header className="flex items-center justify-between px-10 py-6 bg-white shadow-sm relative">
-        <div className="text-xl font-semibold text-purple-700">
-          HUG Foundation
-        </div>
+      <AnimatePresence>
+        {showHeader && (
+          <motion.header
+            key="header"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -100, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="flex items-center justify-between px-10 py-6 bg-white shadow-sm fixed top-0 left-0 right-0 z-50"
+          >
+            <div className="text-xl font-semibold text-[#6D5CAE]">
+              HUG Foundation
+            </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-6 text-sm items-center z-10">
-          <button
-            onClick={() => scrollToId("about")}
-            className="hover:underline cursor-pointer bg-transparent border-none p-0"
-          >
-            About
-          </button>
-          <button
-            onClick={() => scrollToId("programs")}
-            className="hover:underline cursor-pointer bg-transparent border-none p-0"
-          >
-            Programs
-          </button>
-          <button
-            onClick={() => scrollToId("donate")}
-            className="hover:underline cursor-pointer bg-transparent border-none p-0"
-          >
-            Volunteer
-          </button>
-          <button
-            onClick={() => scrollToId("contact")}
-            className="hover:underline cursor-pointer bg-transparent border-none p-0"
-          >
-            Contact
-          </button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToId("donate")}
-            className="bg-purple-600 text-white rounded-full px-4 py-1 font-medium cursor-pointer"
-          >
-            Donate Now
-          </motion.button>
-        </nav>
-
-        {/* Mobile Menu */}
-        <div className="md:hidden z-50 relative">
-          <button onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
-          </button>
-
-          {menuOpen && (
-            <div className="absolute top-14 right-0 w-56 bg-white shadow-lg rounded-md p-4 flex flex-col gap-4 text-sm z-50">
-              {[
-                { label: "About", id: "about" },
-                { label: "Programs", id: "programs" },
-                { label: "Volunteer", id: "donate" },
-                { label: "Contact", id: "contact" },
-              ].map(({ label, id }) => (
-                <button
-                  key={id}
-                  onClick={() => {
-                    scrollToId(id);
-                    setMenuOpen(false);
-                  }}
-                  className="text-left hover:underline bg-transparent border-none p-0"
-                >
-                  {label}
-                </button>
-              ))}
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex gap-6 text-sm items-center z-10">
+              <button
+                onClick={() => scrollToId("about")}
+                className="hover:underline cursor-pointer bg-transparent border-none p-0"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToId("programs")}
+                className="hover:underline cursor-pointer bg-transparent border-none p-0"
+              >
+                Programs
+              </button>
+              <button
+                onClick={() => scrollToId("volunteer")}
+                className="hover:underline cursor-pointer bg-transparent border-none p-0"
+              >
+                Volunteer
+              </button>
+              <button
+                onClick={() =>
+                  window.open("https://tally.so/r/wkB97o", "_blank")
+                }
+                className="hover:underline cursor-pointer bg-transparent border-none p-0"
+              >
+                Contact
+              </button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  scrollToId("donate");
-                  setMenuOpen(false);
-                }}
-                className="bg-purple-600 text-white rounded-full px-4 py-1 font-medium cursor-pointer"
+                onClick={() => scrollToId("donate")}
+                className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium cursor-pointer"
               >
                 Donate Now
               </motion.button>
+            </nav>
+
+            {/* Mobile Menu */}
+            <div className="md:hidden z-50 relative">
+              <button onClick={() => setMenuOpen(!menuOpen)}>
+                {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+              </button>
+
+              {menuOpen && (
+                <div className="absolute top-14 right-0 w-56 bg-white shadow-lg rounded-md p-4 flex flex-col gap-4 text-sm z-50">
+                  {[
+                    { label: "About", id: "about" },
+                    { label: "Programs", id: "programs" },
+                    { label: "Volunteer", id: "volunteer" },
+                    { label: "Contact", id: "contact" },
+                  ].map(({ label, id }) => (
+                    <button
+                      key={id}
+                      onClick={() => {
+                        if (id === "contact") {
+                          window.open("https://tally.so/r/wkB97o", "_blank");
+                        } else {
+                          scrollToId(id);
+                        }
+                        setMenuOpen(false);
+                      }}
+                      className="text-left hover:underline bg-transparent border-none p-0"
+                    >
+                      {label}
+                    </button>
+                  ))}
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      scrollToId("donate");
+                      setMenuOpen(false);
+                    }}
+                    className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium cursor-pointer"
+                  >
+                    Donate Now
+                  </motion.button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </header>
+          </motion.header>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="relative flex flex-col lg:flex-row items-center justify-between px-6 md:px-10 lg:px-20 py-20">
@@ -122,7 +173,7 @@ export default function Home() {
 
         {/* Text Block */}
         <div className="max-w-xl relative z-10">
-          <div className="inline-block px-3 py-1 bg-purple-100 text-purple-600 font-medium rounded-full text-sm mb-3 shadow relative">
+          <div className="inline-block px-3 py-1 bg-purple-100 text-[#6D5CAE] font-medium rounded-full text-sm mb-3 shadow relative">
             <span className="relative z-10">
               501(c)(3) Non-Profit Organization
             </span>
@@ -134,7 +185,7 @@ export default function Home() {
                 className="bg-purple-100 rounded-md absolute inset-0 -z-10 scale-102"
                 aria-hidden="true"
               ></span>
-              <span className="relative font-semibold text-purple-800">
+              <span className="relative font-semibold text-[#6D5CAE]">
                 Underprivileged
               </span>
             </span>{" "}
@@ -149,7 +200,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToId("donate")}
-              className="bg-purple-600 text-white px-6 py-2 rounded-md shadow cursor-pointer"
+              className="bg-[#6D5CAE] text-white px-6 py-2 rounded-md shadow cursor-pointer"
             >
               Get Involved
             </motion.button>
@@ -157,7 +208,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToId("about")}
-              className="border border-purple-600 text-purple-600 px-6 py-2 rounded-md cursor-pointer"
+              className="border border-[#6D5CAE] text-[#6D5CAE] px-6 py-2 rounded-md cursor-pointer"
             >
               Learn More
             </motion.button>
@@ -180,7 +231,7 @@ export default function Home() {
       </section>
 
       {/* Stats */}
-      <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 md:px-20 py-14 bg-[#f9f8ff] text-center text-purple-700 font-semibold">
+      <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 md:px-20 py-14 bg-[#f9f8ff] text-center text-[#6D5CAE] font-semibold">
         <div>
           <p className="text-3xl">150+</p>
           <p className="text-sm text-gray-500">Active Volunteers</p>
@@ -205,7 +256,7 @@ export default function Home() {
         className="px-6 md:px-20 py-20 bg-white text-[#1d1d1f]"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-          About <span className="text-purple-700">HUG Foundation</span>
+          About <span className="text-[#6D5CAE]">HUG Foundation</span>
         </h2>
         <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
           A distinguished 501(c)(3) non-profit organization devoted to
@@ -226,28 +277,28 @@ export default function Home() {
             <h3 className="text-lg font-semibold mb-3">Our Values</h3>
             <ul className="space-y-4 text-gray-700">
               <li className="flex items-start gap-2">
-                <span className="text-purple-600 text-xl">✔</span>
+                <span className="text-[#6D5CAE] text-xl">✔</span>
                 <span>
                   <strong>Compassionate Service</strong> - Approaching every
                   interaction with empathy and care
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-600 text-xl">✔</span>
+                <span className="text-[#6D5CAE] text-xl">✔</span>
                 <span>
                   <strong>Inclusive Community</strong> - Creating spaces where
                   everyone feels valued and welcome
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-600 text-xl">✔</span>
+                <span className="text-[#6D5CAE] text-xl">✔</span>
                 <span>
                   <strong>Leadership Development</strong> - Empowering students
                   to become tomorrow’s leaders
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-600 text-xl">✔</span>
+                <span className="text-[#6D5CAE] text-xl">✔</span>
                 <span>
                   <strong>Sustainable Impact</strong> - Making lasting
                   differences in the communities we serve
@@ -259,7 +310,7 @@ export default function Home() {
           {/* Right Column */}
           <div className="space-y-6">
             <div className="p-6 bg-[#f4f2fd] rounded-lg shadow-sm">
-              <h4 className="text-md font-semibold text-purple-700 mb-1">
+              <h4 className="text-md font-semibold text-[#6D5CAE] mb-1">
                 Student Volunteers
               </h4>
               <p className="text-gray-700 text-sm leading-relaxed">
@@ -269,7 +320,7 @@ export default function Home() {
               </p>
             </div>
             <div className="p-6 bg-[#f4f2fd] rounded-lg shadow-sm">
-              <h4 className="text-md font-semibold text-purple-700 mb-1">
+              <h4 className="text-md font-semibold text-[#6D5CAE] mb-1">
                 Community Impact
               </h4>
               <p className="text-gray-700 text-sm leading-relaxed">
@@ -279,7 +330,7 @@ export default function Home() {
               </p>
             </div>
             <div className="p-6 bg-[#f4f2fd] rounded-lg shadow-sm">
-              <h4 className="text-md font-semibold text-purple-700 mb-1">
+              <h4 className="text-md font-semibold text-[#6D5CAE] mb-1">
                 Holistic Approach
               </h4>
               <p className="text-gray-700 text-sm leading-relaxed">
@@ -326,7 +377,7 @@ export default function Home() {
             </p>
             <a
               href="#"
-              className="text-purple-600 text-sm font-medium hover:underline"
+              className="text-[#6D5CAE] text-sm font-medium hover:underline"
             >
               See impact stories →
             </a>
@@ -339,7 +390,7 @@ export default function Home() {
             </p>
             <a
               href="#"
-              className="text-purple-600 text-sm font-medium hover:underline"
+              className="text-[#6D5CAE] text-sm font-medium hover:underline"
             >
               See impact stories →
             </a>
@@ -352,7 +403,7 @@ export default function Home() {
             </p>
             <a
               href="#"
-              className="text-purple-600 text-sm font-medium hover:underline"
+              className="text-[#6D5CAE] text-sm font-medium hover:underline"
             >
               See impact stories →
             </a>
@@ -361,99 +412,99 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-<section id="programs" className="bg-white px-10 py-20">
-  <h2 className="text-3xl font-bold text-center mb-10">
-    Our <span className="text-purple-700">Programs</span>
-  </h2>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-      <FaTshirt className="text-purple-600 text-3xl mt-1" />
-      <div>
-        <h3 className="font-semibold text-lg mb-2">
-          Clothing Donation Drives
-        </h3>
-        <p className="text-gray-600 mb-2">
-          We collect and distribute gently used apparel — with the
-          exception of undergarments — to individuals and families in
-          need.
-        </p>
-        <a
-          href="https://tally.so/r/n949PG"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-purple-600 hover:underline"
-        >
-          Get Started →
-        </a>
-      </div>
-    </div>
-    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-      <FaBook className="text-purple-600 text-3xl mt-1" />
-      <div>
-        <h3 className="font-semibold text-lg mb-2">
-          Educational Support
-        </h3>
-        <p className="text-gray-600 mb-2">
-          Providing tutoring, mentorship, and educational resources to
-          support academic success in underserved communities.
-        </p>
-        <a
-          href="https://tally.so/r/w50p6Q"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-purple-600 hover:underline"
-        >
-          Apply now →
-        </a>
-      </div>
-    </div>
-    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-      <FaUsers className="text-purple-600 text-3xl mt-1" />
-      <div>
-        <h3 className="font-semibold text-lg mb-2">
-          Leadership Development
-        </h3>
-        <p className="text-gray-600 mb-2">
-          Creating opportunities for students to develop leadership skills
-          through meaningful volunteer experiences.
-        </p>
-        <a
-          href="https://tally.so/r/wv6dQ4"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-purple-600 hover:underline"
-        >
-          Apply now →
-        </a>
-      </div>
-    </div>
-    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-      <FaHeartbeat className="text-purple-600 text-3xl mt-1" />
-      <div>
-        <h3 className="font-semibold text-lg mb-2">
-          Wellness Initiatives
-        </h3>
-        <p className="text-gray-600 mb-2">
-          Promoting physical and mental wellbeing through accessible
-          health resources and community programs.
-        </p>
-        <a
-          href="https://tally.so/r/3qQvLg"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-purple-600 hover:underline"
-        >
-          Apply now →
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+      <section id="programs" className="bg-white px-10 py-20">
+        <h2 className="text-3xl font-bold text-center mb-10">
+          Our <span className="text-[#6D5CAE]">Programs</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+            <FaTshirt className="text-[#6D5CAE] text-3xl mt-1" />
+            <div>
+              <h3 className="font-semibold text-lg mb-2">
+                Clothing Donation Drives
+              </h3>
+              <p className="text-gray-600 mb-2">
+                We collect and distribute gently used apparel — with the
+                exception of undergarments — to individuals and families in
+                need.
+              </p>
+              <a
+                href="https://tally.so/r/n949PG"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6D5CAE] hover:underline"
+              >
+                Get Started →
+              </a>
+            </div>
+          </div>
+          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+            <FaBook className="text-[#6D5CAE] text-3xl mt-1" />
+            <div>
+              <h3 className="font-semibold text-lg mb-2">
+                Educational Support
+              </h3>
+              <p className="text-gray-600 mb-2">
+                Providing tutoring, mentorship, and educational resources to
+                support academic success in underserved communities.
+              </p>
+              <a
+                href="https://tally.so/r/w50p6Q"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6D5CAE] hover:underline"
+              >
+                Apply now →
+              </a>
+            </div>
+          </div>
+          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+            <FaUsers className="text-[#6D5CAE] text-3xl mt-1" />
+            <div>
+              <h3 className="font-semibold text-lg mb-2">
+                Leadership Development
+              </h3>
+              <p className="text-gray-600 mb-2">
+                Creating opportunities for students to develop leadership skills
+                through meaningful volunteer experiences.
+              </p>
+              <a
+                href="https://tally.so/r/wv6dQ4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6D5CAE] hover:underline"
+              >
+                Apply now →
+              </a>
+            </div>
+          </div>
+          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+            <FaHeartbeat className="text-[#6D5CAE] text-3xl mt-1" />
+            <div>
+              <h3 className="font-semibold text-lg mb-2">
+                Wellness Initiatives
+              </h3>
+              <p className="text-gray-600 mb-2">
+                Promoting physical and mental wellbeing through accessible
+                health resources and community programs.
+              </p>
+              <a
+                href="https://tally.so/r/3qQvLg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6D5CAE] hover:underline"
+              >
+                Apply now →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Partners Section */}
       <section className="bg-[#f9f8ff] px-6 md:px-20 py-20">
         <h2 className="text-3xl font-bold text-center mb-3">
-          Our <span className="text-purple-700">Partners</span>
+          Our <span className="text-[#6D5CAE]">Partners</span>
         </h2>
         <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
           Working together with community organizations to create lasting impact
@@ -465,7 +516,7 @@ export default function Home() {
           <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
             <div className="flex items-start gap-3 mb-3">
               <div className="p-3 bg-purple-100 rounded-full">
-                <FaBuilding className="w-6 h-6 text-purple-600" />
+                <FaBuilding className="w-6 h-6 text-[#6D5CAE]" />
               </div>
               <h3 className="text-lg font-semibold">Vegas Stronger</h3>
             </div>
@@ -476,7 +527,7 @@ export default function Home() {
             </p>
             <a
               href="#"
-              className="text-purple-600 font-medium text-sm hover:underline"
+              className="text-[#6D5CAE] font-medium text-sm hover:underline"
             >
               Learn more about our partnership →
             </a>
@@ -487,7 +538,7 @@ export default function Home() {
             <div className="flex items-start gap-3 mb-3">
               <div className="p-3 bg-purple-100 rounded-full">
                 <svg
-                  className="w-6 h-6 text-purple-600"
+                  className="w-6 h-6 text-[#6D5CAE]"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -505,14 +556,75 @@ export default function Home() {
             </p>
             <a
               href="#"
-              className="text-purple-600 font-medium text-sm hover:underline"
+              className="text-[#6D5CAE] font-medium text-sm hover:underline"
             >
               Get in touch →
             </a>
           </div>
         </div>
       </section>
-       <VolunteerSection />
+      <VolunteerSection ref={volunteerRef} />
+
+{/* Footer */}
+<footer
+  className="py-16 text-sm text-[#6D5CAE]"
+  style={{ backgroundColor: "rgba(109, 92, 174, 0.1)" }}
+>
+  <div className="px-6 md:px-20 max-w-[1280px] mx-auto w-full">
+    <div className="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+      {/* Left: Logo */}
+      <div className="flex items-center gap-3 md:flex-1">
+        <Image
+          src="/HUGlogo.png"
+          alt="HUG Foundation Logo"
+          width={50}
+          height={50}
+          className="rounded"
+        />
+        <span className="font-semibold">HUG Foundation</span>
+      </div>
+
+      {/* Center: Nav buttons + copyright */}
+      <div className="flex flex-col items-center flex-1">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-4 mb-4">
+          <button onClick={() => scrollToId("about")} className="hover:underline">
+            About
+          </button>
+          <button onClick={() => scrollToId("programs")} className="hover:underline">
+            Programs
+          </button>
+          <button onClick={() => scrollToId("volunteer")} className="hover:underline">
+            Volunteer
+          </button>
+          <button
+            onClick={() => window.open("https://tally.so/r/wkB97o", "_blank")}
+            className="hover:underline"
+          >
+            Contact
+          </button>
+        </div>
+        <p className="text-center text-xs">
+          © {new Date().getFullYear()} HUG Foundation. All rights reserved.
+          <br />
+          Website designed by{" "}
+          <a
+            href="https://arghyav.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-[#4b3a8f]"
+          >
+            Arghya Vyas
+          </a>
+        </p>
+      </div>
+      {/* Right: Location */}
+      <div className="text-center md:text-right font-medium text-[#6D5CAE] md:flex-1 mt-4 md:mt-0">
+        <p>Henderson, NV</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
     </main>
   );
 }
