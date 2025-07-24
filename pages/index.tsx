@@ -11,6 +11,7 @@ import {
 import { HiMenu, HiX } from "react-icons/hi";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import VolunteerSection from "@/components/applications&contact";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -61,21 +62,17 @@ export default function Home() {
           >
             Contact
           </button>
-          <button
-            onClick={() => scrollToId("donate")}
-            className="bg-transparent border-none p-0"
-          >
           <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => scrollToId("donate")}
-          className="bg-purple-600 text-white rounded-full px-4 py-1 font-medium cursor-pointer"
-        >
-          Donate Now
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToId("donate")}
+            className="bg-purple-600 text-white rounded-full px-4 py-1 font-medium cursor-pointer"
+          >
+            Donate Now
           </motion.button>
-          </button>
         </nav>
 
+        {/* Mobile Menu */}
         <div className="md:hidden z-50 relative">
           <button onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
@@ -364,74 +361,94 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="bg-white px-10 py-20">
-        <h2 className="text-3xl font-bold text-center mb-10">
-          Our <span className="text-purple-700">Programs</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-            <FaTshirt className="text-purple-600 text-3xl mt-1" />
-            <div>
-              <h3 className="font-semibold text-lg mb-2">
-                Clothing Donation Drives
-              </h3>
-              <p className="text-gray-600 mb-2">
-                We collect and distribute gently used apparel — with the
-                exception of undergarments — to individuals and families in
-                need.
-              </p>
-              <a href="#" className="text-purple-600 hover:underline">
-                Learn more
-              </a>
-            </div>
-          </div>
-          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-            <FaBook className="text-purple-600 text-3xl mt-1" />
-            <div>
-              <h3 className="font-semibold text-lg mb-2">
-                Educational Support
-              </h3>
-              <p className="text-gray-600 mb-2">
-                Providing tutoring, mentorship, and educational resources to
-                support academic success in underserved communities.
-              </p>
-              <a href="#" className="text-purple-600 hover:underline">
-                Apply now →
-              </a>
-            </div>
-          </div>
-          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-            <FaUsers className="text-purple-600 text-3xl mt-1" />
-            <div>
-              <h3 className="font-semibold text-lg mb-2">
-                Leadership Development
-              </h3>
-              <p className="text-gray-600 mb-2">
-                Creating opportunities for students to develop leadership skills
-                through meaningful volunteer experiences.
-              </p>
-              <a href="#" className="text-purple-600 hover:underline">
-                Apply now →
-              </a>
-            </div>
-          </div>
-          <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
-            <FaHeartbeat className="text-purple-600 text-3xl mt-1" />
-            <div>
-              <h3 className="font-semibold text-lg mb-2">
-                Wellness Initiatives
-              </h3>
-              <p className="text-gray-600 mb-2">
-                Promoting physical and mental wellbeing through accessible
-                health resources and community programs.
-              </p>
-              <a href="#" className="text-purple-600 hover:underline">
-                Apply now →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+<section id="programs" className="bg-white px-10 py-20">
+  <h2 className="text-3xl font-bold text-center mb-10">
+    Our <span className="text-purple-700">Programs</span>
+  </h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+      <FaTshirt className="text-purple-600 text-3xl mt-1" />
+      <div>
+        <h3 className="font-semibold text-lg mb-2">
+          Clothing Donation Drives
+        </h3>
+        <p className="text-gray-600 mb-2">
+          We collect and distribute gently used apparel — with the
+          exception of undergarments — to individuals and families in
+          need.
+        </p>
+        <a
+          href="https://tally.so/r/n949PG"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-purple-600 hover:underline"
+        >
+          Get Started →
+        </a>
+      </div>
+    </div>
+    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+      <FaBook className="text-purple-600 text-3xl mt-1" />
+      <div>
+        <h3 className="font-semibold text-lg mb-2">
+          Educational Support
+        </h3>
+        <p className="text-gray-600 mb-2">
+          Providing tutoring, mentorship, and educational resources to
+          support academic success in underserved communities.
+        </p>
+        <a
+          href="https://tally.so/r/w50p6Q"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-purple-600 hover:underline"
+        >
+          Apply now →
+        </a>
+      </div>
+    </div>
+    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+      <FaUsers className="text-purple-600 text-3xl mt-1" />
+      <div>
+        <h3 className="font-semibold text-lg mb-2">
+          Leadership Development
+        </h3>
+        <p className="text-gray-600 mb-2">
+          Creating opportunities for students to develop leadership skills
+          through meaningful volunteer experiences.
+        </p>
+        <a
+          href="https://tally.so/r/wv6dQ4"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-purple-600 hover:underline"
+        >
+          Apply now →
+        </a>
+      </div>
+    </div>
+    <div className="p-6 bg-[#f9f8ff] rounded-md shadow flex gap-4 items-start">
+      <FaHeartbeat className="text-purple-600 text-3xl mt-1" />
+      <div>
+        <h3 className="font-semibold text-lg mb-2">
+          Wellness Initiatives
+        </h3>
+        <p className="text-gray-600 mb-2">
+          Promoting physical and mental wellbeing through accessible
+          health resources and community programs.
+        </p>
+        <a
+          href="https://tally.so/r/3qQvLg"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-purple-600 hover:underline"
+        >
+          Apply now →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Partners Section */}
       <section className="bg-[#f9f8ff] px-6 md:px-20 py-20">
@@ -495,6 +512,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+       <VolunteerSection />
     </main>
   );
 }
