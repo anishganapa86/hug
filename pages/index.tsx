@@ -20,32 +20,31 @@ const poppins = Poppins({
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const volunteerRef = useRef<HTMLElement>(null);
+  const [vegasModalOpen, setVegasModalOpen] = useState(false);
+  useEffect(() => {
+  if (vegasModalOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 
-  // For header visibility on scroll
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [vegasModalOpen]);
+  const volunteerRef = useRef<HTMLElement>(null);
   const [showHeader, setShowHeader] = useState(true);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 50) {
-        // Always show header near top
-        setShowHeader(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        // Scrolling down
-        setShowHeader(false);
-      } else {
-        // Scrolling up
-        setShowHeader(true);
-      }
-
+      if (currentScrollY < 50) setShowHeader(true);
+      else if (currentScrollY > lastScrollY.current) setShowHeader(false);
+      else setShowHeader(true);
       lastScrollY.current = currentScrollY;
     }
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -56,7 +55,6 @@ export default function Home() {
       }
       return;
     }
-
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -65,6 +63,7 @@ export default function Home() {
 
   return (
     <main className={`bg-[#f9f8ff] text-[#1d1d1f] ${poppins.className}`}>
+      {/* Header */}
       <AnimatePresence>
         {showHeader && (
           <motion.header
@@ -78,51 +77,21 @@ export default function Home() {
             <div className="text-xl font-semibold text-[#6D5CAE]">
               HUG Foundation
             </div>
-
-            {/* Desktop Nav */}
             <nav className="hidden md:flex gap-6 text-sm items-center z-10">
-              <button
-                onClick={() => scrollToId("about")}
-                className="hover:underline cursor-pointer bg-transparent border-none p-0"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToId("programs")}
-                className="hover:underline cursor-pointer bg-transparent border-none p-0"
-              >
-                Programs
-              </button>
-              <button
-                onClick={() => scrollToId("volunteer")}
-                className="hover:underline cursor-pointer bg-transparent border-none p-0"
-              >
-                Volunteer
-              </button>
-              <button
-                onClick={() =>
-                  window.open("https://tally.so/r/wkB97o", "_blank")
-                }
-                className="hover:underline cursor-pointer bg-transparent border-none p-0"
-              >
-                Contact
-              </button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button onClick={() => scrollToId("about")} className="hover:underline">About</button>
+              <button onClick={() => scrollToId("programs")} className="hover:underline">Programs</button>
+              <button onClick={() => scrollToId("volunteer")} className="hover:underline">Volunteer</button>
+              <button onClick={() => window.open("https://tally.so/r/wkB97o", "_blank")} className="hover:underline">Contact</button>
+              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToId("donate")}
-                className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium cursor-pointer"
-              >
+                className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium">
                 Donate Now
               </motion.button>
             </nav>
-
-            {/* Mobile Menu */}
             <div className="md:hidden z-50 relative">
               <button onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
               </button>
-
               {menuOpen && (
                 <div className="absolute top-14 right-0 w-56 bg-white shadow-lg rounded-md p-4 flex flex-col gap-4 text-sm z-50">
                   {[
@@ -141,7 +110,7 @@ export default function Home() {
                         }
                         setMenuOpen(false);
                       }}
-                      className="text-left hover:underline bg-transparent border-none p-0"
+                      className="text-left hover:underline"
                     >
                       {label}
                     </button>
@@ -153,7 +122,7 @@ export default function Home() {
                       scrollToId("donate");
                       setMenuOpen(false);
                     }}
-                    className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium cursor-pointer"
+                    className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium"
                   >
                     Donate Now
                   </motion.button>
@@ -501,68 +470,125 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="bg-[#f9f8ff] px-6 md:px-20 py-20">
-        <h2 className="text-3xl font-bold text-center mb-3">
-          Our <span className="text-[#6D5CAE]">Partners</span>
+    {/* Partners Section */}
+<section className="bg-[#f9f8ff] px-6 md:px-20 py-20">
+  <h2 className="text-3xl font-bold text-center mb-3">
+    Our <span className="text-[#6D5CAE]">Partners</span>
+  </h2>
+  <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+    Working together with community organizations to create lasting impact
+    in Henderson and the greater Las Vegas area.
+  </p>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {/* Vegas Stronger */}
+    <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
+      <div className="flex items-start gap-3 mb-3">
+        <div className="p-3 bg-purple-100 rounded-full">
+          <FaBuilding className="w-6 h-6 text-[#6D5CAE]" />
+        </div>
+        <h3 className="text-lg font-semibold">Vegas Stronger</h3>
+      </div>
+      <p className="text-gray-600 mb-4">
+        Collaborating to strengthen our community through unified efforts
+        and shared resources, making Las Vegas a better place for everyone.
+      </p>
+      <button
+        onClick={() => setVegasModalOpen(true)}
+        className="text-[#6D5CAE] font-medium text-sm hover:underline"
+      >
+        Learn more about our partnership →
+      </button>
+    </div>
+
+    {/* Become a Partner */}
+    <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
+      <div className="flex items-start gap-3 mb-3">
+        <div className="p-3 bg-purple-100 rounded-full">
+          <svg
+            className="w-6 h-6 text-[#6D5CAE]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-semibold">Become a Partner</h3>
+      </div>
+      <p className="text-gray-600 mb-4">
+        We're always looking to collaborate with organizations that share
+        our vision for a stronger, more inclusive community in Henderson
+        and beyond.
+      </p>
+      <a
+        href="https://tally.so/r/wkB97o"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[#6D5CAE] font-medium text-sm hover:underline"
+      >
+        Get in touch →
+      </a>
+    </div>
+  </div>
+</section>
+
+{/* Vegas Stronger Modal */}
+<AnimatePresence>
+  {vegasModalOpen && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+        transitionEnd: { display: "none" },
+      }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]"
+    >
+      <motion.div
+        initial={{ scale: 0.95 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.95 }}
+        className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto mx-4 p-6 relative"
+      >
+        {/* Close Button */}
+        <button
+          onClick={() => setVegasModalOpen(false)}
+          className="absolute top-4 right-4 text-gray-600 hover:text-black text-xl font-bold"
+        >
+          &times;
+        </button>
+
+        {/* Modal Content */}
+        <h2 className="text-2xl font-bold mb-4 text-[#6D5CAE]">
+          Our Partnership with Vegas Stronger
         </h2>
-        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-          Working together with community organizations to create lasting impact
-          in Henderson and the greater Las Vegas area.
+        <p className="text-gray-700 mb-4">
+          HUG Foundation started in July 2024, where we collected 250 blankets and donated them all to Vegas Stronger. We worked with Stacey Lockhart to help hundreds of people to ensure their comfort in a time of need. As of now on a quarterly basis partnering with other school in the Clark County district to achieve a set goal of clothe donations ranging from shirts to shoes. HUG continues to strive for the warmth that everyone deserves.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Vegas Stronger */}
-          <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
-            <div className="flex items-start gap-3 mb-3">
-              <div className="p-3 bg-purple-100 rounded-full">
-                <FaBuilding className="w-6 h-6 text-[#6D5CAE]" />
-              </div>
-              <h3 className="text-lg font-semibold">Vegas Stronger</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Collaborating to strengthen our community through unified efforts
-              and shared resources, making Las Vegas a better place for
-              everyone.
-            </p>
-            <a
-              href="#"
-              className="text-[#6D5CAE] font-medium text-sm hover:underline"
-            >
-              Learn more about our partnership →
-            </a>
-          </div>
-
-          {/* Become a Partner */}
-          <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
-            <div className="flex items-start gap-3 mb-3">
-              <div className="p-3 bg-purple-100 rounded-full">
-                <svg
-                  className="w-6 h-6 text-[#6D5CAE]"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold">Become a Partner</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              We're always looking to collaborate with organizations that share
-              our vision for a stronger, more inclusive community in Henderson
-              and beyond.
-            </p>
-            <a
-              href="#"
-              className="text-[#6D5CAE] font-medium text-sm hover:underline"
-            >
-              Get in touch →
-            </a>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Image
+            src="/vegasstronger1.jpg"
+            alt="Vegas Stronger 1"
+            width={500}
+            height={300}
+            className="rounded-md object-cover w-full h-auto"
+          />
+          <Image
+            src="/vegasstronger2.jpg"
+            alt="Vegas Stronger 2"
+            width={500}
+            height={300}
+            className="rounded-md object-cover w-full h-auto"
+          />
         </div>
-      </section>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
       <VolunteerSection ref={volunteerRef} />
 
 {/* Footer */}
