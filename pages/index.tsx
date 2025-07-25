@@ -22,16 +22,16 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [vegasModalOpen, setVegasModalOpen] = useState(false);
   useEffect(() => {
-  if (vegasModalOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+    if (vegasModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-  return () => {
-    document.body.style.overflow = "auto";
-  };
-}, [vegasModalOpen]);
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [vegasModalOpen]);
   const volunteerRef = useRef<HTMLElement>(null);
   const [showHeader, setShowHeader] = useState(true);
   const lastScrollY = useRef(0);
@@ -51,7 +51,10 @@ export default function Home() {
   function scrollToId(id: string) {
     if (id === "volunteer") {
       if (volunteerRef.current) {
-        volunteerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        volunteerRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
       return;
     }
@@ -78,13 +81,38 @@ export default function Home() {
               HUG Foundation
             </div>
             <nav className="hidden md:flex gap-6 text-sm items-center z-10">
-              <button onClick={() => scrollToId("about")} className="hover:underline">About</button>
-              <button onClick={() => scrollToId("programs")} className="hover:underline">Programs</button>
-              <button onClick={() => scrollToId("volunteer")} className="hover:underline">Volunteer</button>
-              <button onClick={() => window.open("https://tally.so/r/wkB97o", "_blank")} className="hover:underline">Contact</button>
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <button
+                onClick={() => scrollToId("about")}
+                className="hover:underline"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToId("programs")}
+                className="hover:underline"
+              >
+                Programs
+              </button>
+              <button
+                onClick={() => scrollToId("volunteer")}
+                className="hover:underline"
+              >
+                Volunteer
+              </button>
+              <button
+                onClick={() =>
+                  window.open("https://tally.so/r/wkB97o", "_blank")
+                }
+                className="hover:underline"
+              >
+                Contact
+              </button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToId("donate")}
-                className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium">
+                className="bg-[#6D5CAE] text-white rounded-full px-4 py-1 font-medium"
+              >
                 Donate Now
               </motion.button>
             </nav>
@@ -470,187 +498,206 @@ export default function Home() {
         </div>
       </section>
 
-    {/* Partners Section */}
-<section className="bg-[#f9f8ff] px-6 md:px-20 py-20">
-  <h2 className="text-3xl font-bold text-center mb-3">
-    Our <span className="text-[#6D5CAE]">Partners</span>
-  </h2>
-  <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-    Working together with community organizations to create lasting impact
-    in Henderson and the greater Las Vegas area.
-  </p>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {/* Vegas Stronger */}
-    <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
-      <div className="flex items-start gap-3 mb-3">
-        <div className="p-3 bg-purple-100 rounded-full">
-          <FaBuilding className="w-6 h-6 text-[#6D5CAE]" />
-        </div>
-        <h3 className="text-lg font-semibold">Vegas Stronger</h3>
-      </div>
-      <p className="text-gray-600 mb-4">
-        Collaborating to strengthen our community through unified efforts
-        and shared resources, making Las Vegas a better place for everyone.
-      </p>
-      <button
-        onClick={() => setVegasModalOpen(true)}
-        className="text-[#6D5CAE] font-medium text-sm hover:underline"
-      >
-        Learn more about our partnership →
-      </button>
-    </div>
-
-    {/* Become a Partner */}
-    <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
-      <div className="flex items-start gap-3 mb-3">
-        <div className="p-3 bg-purple-100 rounded-full">
-          <svg
-            className="w-6 h-6 text-[#6D5CAE]"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="text-lg font-semibold">Become a Partner</h3>
-      </div>
-      <p className="text-gray-600 mb-4">
-        We're always looking to collaborate with organizations that share
-        our vision for a stronger, more inclusive community in Henderson
-        and beyond.
-      </p>
-      <a
-        href="https://tally.so/r/wkB97o"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-[#6D5CAE] font-medium text-sm hover:underline"
-      >
-        Get in touch →
-      </a>
-    </div>
-  </div>
-</section>
-
-{/* Vegas Stronger Modal */}
-<AnimatePresence>
-  {vegasModalOpen && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{
-        opacity: 0,
-        transitionEnd: { display: "none" },
-      }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]"
-    >
-      <motion.div
-        initial={{ scale: 0.95 }}
-        animate={{ scale: 1 }}
-        exit={{ scale: 0.95 }}
-        className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto mx-4 p-6 relative"
-      >
-        {/* Close Button */}
-        <button
-          onClick={() => setVegasModalOpen(false)}
-          className="absolute top-4 right-4 text-gray-600 hover:text-black text-xl font-bold"
-        >
-          &times;
-        </button>
-
-        {/* Modal Content */}
-        <h2 className="text-2xl font-bold mb-4 text-[#6D5CAE]">
-          Our Partnership with Vegas Stronger
+      {/* Partners Section */}
+      <section className="bg-[#f9f8ff] px-6 md:px-20 py-20">
+        <h2 className="text-3xl font-bold text-center mb-3">
+          Our <span className="text-[#6D5CAE]">Partners</span>
         </h2>
-        <p className="text-gray-700 mb-4">
-          HUG Foundation started in July 2024, where we collected 250 blankets and donated them all to Vegas Stronger. We worked with Stacey Lockhart to help hundreds of people to ensure their comfort in a time of need. As of now on a quarterly basis partnering with other school in the Clark County district to achieve a set goal of clothe donations ranging from shirts to shoes. HUG continues to strive for the warmth that everyone deserves.
+        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+          Working together with community organizations to create lasting impact
+          in Henderson and the greater Las Vegas area.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Image
-            src="/vegasstronger1.jpg"
-            alt="Vegas Stronger 1"
-            width={500}
-            height={300}
-            className="rounded-md object-cover w-full h-auto"
-          />
-          <Image
-            src="/vegasstronger2.jpg"
-            alt="Vegas Stronger 2"
-            width={500}
-            height={300}
-            className="rounded-md object-cover w-full h-auto"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Vegas Stronger */}
+          <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
+            <div className="flex items-start gap-3 mb-3">
+              <div className="p-3 bg-purple-100 rounded-full">
+                <FaBuilding className="w-6 h-6 text-[#6D5CAE]" />
+              </div>
+              <h3 className="text-lg font-semibold">Vegas Stronger</h3>
+            </div>
+            <p className="text-gray-600 mb-4">
+              Collaborating to strengthen our community through unified efforts
+              and shared resources, making Las Vegas a better place for
+              everyone.
+            </p>
+            <button
+              onClick={() => setVegasModalOpen(true)}
+              className="text-[#6D5CAE] font-medium text-sm hover:underline"
+            >
+              Learn more about our partnership →
+            </button>
+          </div>
+
+          {/* Become a Partner */}
+          <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-all">
+            <div className="flex items-start gap-3 mb-3">
+              <div className="p-3 bg-purple-100 rounded-full">
+                <svg
+                  className="w-6 h-6 text-[#6D5CAE]"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold">Become a Partner</h3>
+            </div>
+            <p className="text-gray-600 mb-4">
+              We're always looking to collaborate with organizations that share
+              our vision for a stronger, more inclusive community in Henderson
+              and beyond.
+            </p>
+            <a
+              href="https://tally.so/r/wkB97o"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#6D5CAE] font-medium text-sm hover:underline"
+            >
+              Get in touch →
+            </a>
+          </div>
         </div>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
+      </section>
+
+      {/* Vegas Stronger Modal */}
+      <AnimatePresence>
+        {vegasModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{
+              opacity: 0,
+              transitionEnd: { display: "none" },
+            }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]"
+          >
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto mx-4 p-6 relative"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setVegasModalOpen(false)}
+                className="absolute top-4 right-4 text-gray-600 hover:text-black text-xl font-bold"
+              >
+                &times;
+              </button>
+
+              {/* Modal Content */}
+              <h2 className="text-2xl font-bold mb-4 text-[#6D5CAE]">
+                Our Partnership with Vegas Stronger
+              </h2>
+              <p className="text-gray-700 mb-4">
+                HUG Foundation started in July 2024, where we collected 250
+                blankets and donated them all to Vegas Stronger. We worked with
+                Stacey Lockhart to help hundreds of people to ensure their
+                comfort in a time of need. As of now on a quarterly basis
+                partnering with other school in the Clark County district to
+                achieve a set goal of clothe donations ranging from shirts to
+                shoes. HUG continues to strive for the warmth that everyone
+                deserves.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Image
+                  src="/vegasstronger1.jpg"
+                  alt="Vegas Stronger 1"
+                  width={500}
+                  height={300}
+                  className="rounded-md object-cover w-full h-auto"
+                />
+                <Image
+                  src="/vegasstronger2.jpg"
+                  alt="Vegas Stronger 2"
+                  width={500}
+                  height={300}
+                  className="rounded-md object-cover w-full h-auto"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <VolunteerSection ref={volunteerRef} />
 
-{/* Footer */}
-<footer
-  className="py-16 text-sm text-[#6D5CAE]"
-  style={{ backgroundColor: "rgba(109, 92, 174, 0.1)" }}
->
-  <div className="px-6 md:px-20 max-w-[1280px] mx-auto w-full">
-    <div className="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
-      {/* Left: Logo */}
-      <div className="flex items-center gap-3 md:flex-1">
-        <Image
-          src="/HUGlogo.png"
-          alt="HUG Foundation Logo"
-          width={50}
-          height={50}
-          className="rounded"
-        />
-        <span className="font-semibold">HUG Foundation</span>
-      </div>
+      {/* Footer */}
+      <footer
+        className="py-16 text-sm text-[#6D5CAE]"
+        style={{ backgroundColor: "rgba(109, 92, 174, 0.1)" }}
+      >
+        <div className="px-6 md:px-20 max-w-[1280px] mx-auto w-full">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+            {/* Left: Logo */}
+            <div className="flex items-center gap-3 md:flex-1">
+              <Image
+                src="/HUGlogo.png"
+                alt="HUG Foundation Logo"
+                width={50}
+                height={50}
+                className="rounded"
+              />
+              <span className="font-semibold">HUG Foundation</span>
+            </div>
 
-      {/* Center: Nav buttons + copyright */}
-      <div className="flex flex-col items-center flex-1">
-        <div className="flex flex-wrap justify-center gap-6 md:gap-4 mb-4">
-          <button onClick={() => scrollToId("about")} className="hover:underline">
-            About
-          </button>
-          <button onClick={() => scrollToId("programs")} className="hover:underline">
-            Programs
-          </button>
-          <button onClick={() => scrollToId("volunteer")} className="hover:underline">
-            Volunteer
-          </button>
-          <button
-            onClick={() => window.open("https://tally.so/r/wkB97o", "_blank")}
-            className="hover:underline"
-          >
-            Contact
-          </button>
+            {/* Center: Nav buttons + copyright */}
+            <div className="flex flex-col items-center flex-1">
+              <div className="flex flex-wrap justify-center gap-6 md:gap-4 mb-4">
+                <button
+                  onClick={() => scrollToId("about")}
+                  className="hover:underline"
+                >
+                  About
+                </button>
+                <button
+                  onClick={() => scrollToId("programs")}
+                  className="hover:underline"
+                >
+                  Programs
+                </button>
+                <button
+                  onClick={() => scrollToId("volunteer")}
+                  className="hover:underline"
+                >
+                  Volunteer
+                </button>
+                <button
+                  onClick={() =>
+                    window.open("https://tally.so/r/wkB97o", "_blank")
+                  }
+                  className="hover:underline"
+                >
+                  Contact
+                </button>
+              </div>
+              <p className="text-center text-xs">
+                © {new Date().getFullYear()} HUG Foundation. All rights
+                reserved.
+                <br />
+                Website designed by{" "}
+                <a
+                  href="https://arghyav.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-[#4b3a8f]"
+                >
+                  Arghya Vyas
+                </a>
+              </p>
+            </div>
+            {/* Right: Location */}
+            <div className="text-center md:text-right font-medium text-[#6D5CAE] md:flex-1 mt-4 md:mt-0">
+              <p>Henderson, NV</p>
+            </div>
+          </div>
         </div>
-        <p className="text-center text-xs">
-          © {new Date().getFullYear()} HUG Foundation. All rights reserved.
-          <br />
-          Website designed by{" "}
-          <a
-            href="https://arghyav.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-[#4b3a8f]"
-          >
-            Arghya Vyas
-          </a>
-        </p>
-      </div>
-      {/* Right: Location */}
-      <div className="text-center md:text-right font-medium text-[#6D5CAE] md:flex-1 mt-4 md:mt-0">
-        <p>Henderson, NV</p>
-      </div>
-    </div>
-  </div>
-</footer>
-
+      </footer>
     </main>
   );
 }
