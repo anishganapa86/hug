@@ -12,6 +12,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import VolunteerSection from "@/components/applications&contact";
+import Head from 'next/head';
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,17 +22,21 @@ const poppins = Poppins({
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [vegasModalOpen, setVegasModalOpen] = useState(false);
+  const [impact1Open, setImpact1Open] = useState(false);
+  const [impact2Open, setImpact2Open] = useState(false);
+  const [impact3Open, setImpact3Open] = useState(false);
+
   useEffect(() => {
-    if (vegasModalOpen) {
+    if (vegasModalOpen || impact1Open || impact2Open || impact3Open) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [vegasModalOpen]);
+  }, [vegasModalOpen, impact1Open, impact2Open, impact3Open]);
+
   const volunteerRef = useRef<HTMLElement>(null);
   const [showHeader, setShowHeader] = useState(true);
   const lastScrollY = useRef(0);
@@ -65,6 +70,11 @@ export default function Home() {
   }
 
   return (
+    <>
+      <Head>
+        <title>HUG Foundation</title>
+        <meta name="home" content="Learn more about our mission." />
+      </Head>
     <main className={`bg-[#f9f8ff] text-[#1d1d1f] ${poppins.className}`}>
       {/* Header */}
       <AnimatePresence>
@@ -366,47 +376,169 @@ export default function Home() {
 
         {/* Your Impact Cards */}
         <div className="flex flex-col gap-6 w-full lg:max-w-md">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold mb-2">$25 Provides</h3>
-            <p className="text-gray-600 mb-4">
-              Essential school supplies for a student in need, supporting their
-              educational journey.
-            </p>
-            <a
-              href="#"
-              className="text-[#6D5CAE] text-sm font-medium hover:underline"
-            >
-              See impact stories →
-            </a>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold mb-2">$100 Provides</h3>
-            <p className="text-gray-600 mb-4">
-              An entire month of after-school programming for a child, including
-              academic support and enrichment activities.
-            </p>
-            <a
-              href="#"
-              className="text-[#6D5CAE] text-sm font-medium hover:underline"
-            >
-              See impact stories →
-            </a>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold mb-2">Clothing Donations</h3>
-            <p className="text-gray-600 mb-4">
-              Your donated clothing items go directly to families in need,
-              providing warmth, comfort, and dignity.
-            </p>
-            <a
-              href="#"
-              className="text-[#6D5CAE] text-sm font-medium hover:underline"
-            >
-              See impact stories →
-            </a>
+          <div className="flex flex-col gap-6 w-full lg:max-w-md">
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold mb-2">$25 Provides</h3>
+              <p className="text-gray-600 mb-4">
+                Essential school supplies for a student in need, supporting
+                their educational journey.
+              </p>
+              <button
+                onClick={() => setImpact1Open(true)}
+                className="text-[#6D5CAE] text-sm font-medium hover:underline"
+              >
+                See impact stories →
+              </button>
+            </div>
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold mb-2">$100 Provides</h3>
+              <p className="text-gray-600 mb-4">
+                An entire month of after-school programming for a child,
+                including academic support and enrichment activities.
+              </p>
+              <button
+                onClick={() => setImpact2Open(true)}
+                className="text-[#6D5CAE] text-sm font-medium hover:underline"
+              >
+                See impact stories →
+              </button>
+            </div>
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold mb-2">Clothing Donations</h3>
+              <p className="text-gray-600 mb-4">
+                Your donated clothing items go directly to families in need,
+                providing warmth, comfort, and dignity.
+              </p>
+              <button
+                onClick={() => setImpact3Open(true)}
+                className="text-[#6D5CAE] text-sm font-medium hover:underline"
+              >
+                See impact stories →
+              </button>
+            </div>
           </div>
         </div>
       </section>
+      <AnimatePresence>
+        {(vegasModalOpen || impact1Open || impact2Open || impact3Open) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-40 z-[9999] flex justify-center items-center px-4"
+            onClick={() => {
+              setVegasModalOpen(false);
+              setImpact1Open(false);
+              setImpact2Open(false);
+              setImpact3Open(false);
+            }}
+          >
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white relative rounded-lg p-6 max-w-md w-full shadow-xl"
+            >
+              {/* Close button */}
+              <button
+                className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-xl font-bold"
+                onClick={() => {
+                  setVegasModalOpen(false);
+                  setImpact1Open(false);
+                  setImpact2Open(false);
+                  setImpact3Open(false);
+                }}
+                aria-label="Close modal"
+              >
+                ×
+              </button>
+
+              {vegasModalOpen && (
+                <>
+                  <h3 className="text-lg font-semibold mb-4">
+                    Vegas Clothing Drive
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    During our Vegas drive, we provided hundreds of donated
+                    clothing items to local families. One parent shared how
+                    winter jackets from HUG helped their children stay warm
+                    during a difficult season.
+                  </p>
+                </>
+              )}
+              {impact1Open && (
+                <>
+                  <h3 className="text-lg font-semibold mb-4">$25 Impact</h3>
+                  <p className="text-gray-600 text-sm">
+                    Thanks to a generous $25 donation, HUG Foundation assembled
+                    a complete hygiene packet filled with essentials such as
+                    soap, shampoo, conditioner, toothpaste, a toothbrush,
+                    deodorant, and sanitary items. For someone struggling with
+                    homelessness or financial hardship, these items are not just
+                    products they are tools for confidence, dignity, and self
+                    care. This single packet means someone can go to school work
+                    or an important meeting feeling fresh and respected. Your
+                    $25 doesn't just buy hygiene items, it creates a moment of
+                    hope and reminds someone in need that their community cares
+                    for them.
+                  </p>
+                </>
+              )}
+              {impact2Open && (
+                <>
+                  <h3 className="text-lg font-semibold mb-4">$100 Impact</h3>
+                  <p className="text-gray-600 text-sm">
+                    At HUG Foundation, a $100 donation goes a long way. With
+                    just one contribution, we were able to provide 4 hygiene
+                    packets filled with essentials like soap, toothbrushes, and
+                    sanitary items. These packets were distributed during a
+                    community outreach event, helping people experiencing
+                    homelessness feel clean, cared for, and seen. That same $100
+                    also helped support our SAT tutoring initiative. Three
+                    students received a full week of tutoring and access to test
+                    prep materials. These students, who otherwise would not have
+                    had access to quality support, were given a real chance to
+                    improve their scores and pursue college with confidence.
+                    Part of the donation also went toward expanding our outreach
+                    efforts. We printed flyers, delivered supplies, and reached
+                    more than 40 individuals in just one day. The impact of one
+                    donation stretched across hygiene, education, and community
+                    care. At HUG Foundation, every dollar is used to create
+                    meaningful, lasting change.
+                  </p>
+                </>
+              )}
+              {impact3Open && (
+                <>
+                  <h3 className="text-lg font-semibold mb-4">
+                    Clothing Donation Impact
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    Thanks to the generosity of our supporters, HUG Foundation
+                    collected over 1,000 articles of clothing through local
+                    drives, school partnerships, and neighborhood drop-off
+                    events. These clothes were sorted, cleaned, and carefully
+                    packed by our volunteers before being donated to Vegas
+                    Stronger, a nonprofit dedicated to helping individuals
+                    recovering from homelessness, addiction, and poverty in Las
+                    Vegas. From warm jackets to clean shirts, every piece of
+                    clothing you donated reached someone who needed it most-men,
+                    women, and children striving to rebuild their lives. These
+                    clothes don't just keep people warm— they offer confidence
+                    for job interviews, comfort during tough times, and a
+                    reminder that they are not forgotten. Your support allows
+                    HUG Foundation to continue partnering with organizations
+                    like Vegas Stronger, turning every closet clean out into a
+                    chance to change lives.
+                  </p>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Programs Section */}
       <section id="programs" className="bg-white px-10 py-20">
@@ -699,5 +831,6 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  </>
   );
 }
