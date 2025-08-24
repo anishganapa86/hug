@@ -794,6 +794,11 @@ export default function Home() {
                 >
                   Volunteer
                 </button>
+                <button>
+                <a href="/sat-tutoring" className="hover:underline">
+                  SAT Tutoring
+                </a>
+                </button>
                 <button
                   onClick={() =>
                     window.open("https://tally.so/r/wkB97o", "_blank")
