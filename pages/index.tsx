@@ -725,9 +725,9 @@ export default function Home() {
                 HUG Foundation started in July 2024, where we collected 250
                 blankets and donated them all to Vegas Stronger. We worked with
                 Stacey Lockhart to help hundreds of people to ensure their
-                comfort in a time of need. As of now on a quarterly basis
-                partnering with other school in the Clark County district to
-                achieve a set goal of clothe donations ranging from shirts to
+                comfort in a time of need. As of now, we assist vegas stronger on a quarterly 
+                basis, partnering with other schools in the Clark County district to
+                achieve a set goal of donations ranging from shirts to
                 shoes. HUG continues to strive for the warmth that everyone
                 deserves.
               </p>
