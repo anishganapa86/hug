@@ -91,28 +91,20 @@ export default function Home() {
               HUG Foundation
             </div>
             <nav className="hidden md:flex gap-6 text-sm items-center z-10">
-              <button
-                onClick={() => scrollToId("about")}
-                className="hover:underline"
-              >
+              <button onClick={() => scrollToId("about")} className="hover:underline">
                 About
               </button>
-              <button
-                onClick={() => scrollToId("programs")}
-                className="hover:underline"
-              >
+              <button onClick={() => scrollToId("programs")} className="hover:underline">
                 Programs
               </button>
-              <button
-                onClick={() => scrollToId("volunteer")}
-                className="hover:underline"
-              >
+              <button onClick={() => scrollToId("volunteer")} className="hover:underline">
                 Volunteer
               </button>
+              <a href="/sat-tutoring" className="hover:underline">
+                SAT Tutoring
+              </a>
               <button
-                onClick={() =>
-                  window.open("https://tally.so/r/wkB97o", "_blank")
-                }
+                onClick={() => window.open("https://tally.so/r/wkB97o", "_blank")}
                 className="hover:underline"
               >
                 Contact
@@ -136,15 +128,18 @@ export default function Home() {
                     { label: "About", id: "about" },
                     { label: "Programs", id: "programs" },
                     { label: "Volunteer", id: "volunteer" },
+                    { label: "SAT Tutoring", link: "/sat-tutoring" },
                     { label: "Contact", id: "contact" },
-                  ].map(({ label, id }) => (
+                  ].map(({ label, id, link }) => (
                     <button
-                      key={id}
+                      key={label}
                       onClick={() => {
-                        if (id === "contact") {
+                        if (link) {
+                          window.location.href = link;
+                        } else if (id === "contact") {
                           window.open("https://tally.so/r/wkB97o", "_blank");
                         } else {
-                          scrollToId(id);
+                          scrollToId(id!);
                         }
                         setMenuOpen(false);
                       }}
@@ -812,7 +807,7 @@ export default function Home() {
                 © {new Date().getFullYear()} HUG Foundation. All rights
                 reserved.
                 <br />
-                Website designed by{" "}
+                Website designed and built by{" "}
                 <a
                   href="https://arghyav.vercel.app/"
                   target="_blank"
