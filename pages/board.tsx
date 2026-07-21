@@ -32,13 +32,6 @@ const MEMBERS: BoardMember[] = [
     ],
   },
   {
-    name: "Soraya Rincon",
-    role: "Outreach Director",
-    photo: "/board/soraya.png",
-    objectPosition: "center 22%",
-    funFacts: ["Born in Italy", "Has had two knee surgeries"],
-  },
-  {
     name: "Gabrielle Sioson",
     role: "Social Media Coordinator",
     photo: "/board/gabrielle.png",
