@@ -7,24 +7,29 @@ interface GalleryItem {
   caption: string;
 }
 
-// Five real event photos in /public/gallery (impact-1.png … impact-5.png).
+// Real event photos in /public/gallery (impact-1.png … impact-7.png).
 const ITEMS: GalleryItem[] = [
   { src: "/gallery/impact-1.png", caption: "Hygiene packet assembly" },
   { src: "/gallery/impact-2.png", caption: "HUG for Warmth" },
   { src: "/gallery/impact-3.png", caption: "Donation box drop-off" },
   { src: "/gallery/impact-4.png", caption: "Volunteer group photo" },
   { src: "/gallery/impact-5.png", caption: "Clothing drive" },
+  { src: "/gallery/impact-6.png", caption: "HUG international scholars program" },
+  { src: "/gallery/impact-7.png", caption: "HUG international scholars program" },
 ];
 
-// Intentional layout for exactly 5 tiles:
-//  • desktop (6-col grid): two large on top (span 3), three below (span 2)
-//  • mobile (2-col grid): a 2×2 block + a full-width fifth tile
+// Intentional layout for 7 tiles:
+//  • desktop (6-col grid): two large on top (span 3), three below (span 2),
+//    then two more (span 3) closing the row
+//  • mobile (2-col grid): a 2×2 block, a full-width tile, then a 2×2 block
 const LAYOUT = [
   "col-span-1 md:col-span-3 h-52 md:h-72",
   "col-span-1 md:col-span-3 h-52 md:h-72",
   "col-span-1 md:col-span-2 h-52 md:h-60",
   "col-span-1 md:col-span-2 h-52 md:h-60",
   "col-span-2 md:col-span-2 h-52 md:h-60",
+  "col-span-1 md:col-span-3 h-52 md:h-72",
+  "col-span-1 md:col-span-3 h-52 md:h-72",
 ];
 
 function Tile({
