@@ -15,6 +15,13 @@ const PARTNERS: Partner[] = [
   { name: "SomiSomi", file: "/partners/somisomi.png" },
   { name: "Shake Shack", file: "/partners/shake-shack.png" },
   { name: "Chipotle", file: "/partners/chipotle.png" },
+  { name: "Jaipur National University", file: "/partners/Screenshot%202026-07-20%20203854.png" },
+  { name: "Pavi Sanstha", file: "/partners/Screenshot%202026-07-20%20203936.png" },
+  {
+    name: "Rajmata Krishna Kumari Girls' Public School",
+    file: "/partners/Screenshot%202026-07-20%20204015.png",
+  },
+  { name: "New Angel's Academy", file: "/partners/Screenshot%202026-07-20%20210605.png" },
 ];
 
 function PartnerLogo({ partner }: { partner: Partner }) {
