@@ -232,12 +232,6 @@ function HomeContent() {
             }}
           />
 
-          {/* Blend: black space → daylight (#f9f8ff) */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-40 z-[2] bg-gradient-to-b from-transparent to-[#f9f8ff]"
-          />
-
           {/* Text */}
           <motion.div
             initial={{ opacity: 0, y: 32, filter: "blur(10px)" }}
@@ -344,7 +338,7 @@ function HomeContent() {
           </button>
         </section>
 
-        {/* ─── STATS ────────────────────────────────────────────────────── */}
+        {/* ─── STATS ─────────────────────────────────────────────────────────────── */}
         <section
           id="stats"
           className="space-panel-white backdrop-blur-sm py-14 px-6 md:px-20"
@@ -381,7 +375,7 @@ function HomeContent() {
 
         <NebulaDivider />
 
-        {/* ─── ABOUT ────────────────────────────────────────────────────── */}
+        {/* ─── ABOUT ───────────────────────────────────────────────────────────── */}
         <section
           id="about"
           className="relative px-6 md:px-20 py-28 md:py-32 space-panel backdrop-blur-sm text-[#1d1d1f] overflow-hidden"
@@ -532,7 +526,7 @@ function HomeContent() {
           </div>
         </section>
 
-        {/* ─── GLOBE ────────────────────────────────────────────────────── */}
+        {/* ─── GLOBE ───────────────────────────────────────────────────────────── */}
         <section className="space-panel-white backdrop-blur-sm py-20 px-6 md:px-20 overflow-hidden">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div className="w-full md:w-1/2 h-64 md:h-80 relative">
@@ -554,7 +548,7 @@ function HomeContent() {
 
         <NebulaDivider />
 
-        {/* ─── PROGRAMS (tabs) ──────────────────────────────────────────── */}
+        {/* ─── PROGRAMS (tabs) ──────────────────────────────────────────────── */}
         <section
           id="programs"
           className="space-panel backdrop-blur-sm px-6 md:px-20 py-24"
@@ -570,7 +564,7 @@ function HomeContent() {
           <ProgramTabs onApply={openProgram} />
         </section>
 
-        {/* ─── DONATE ───────────────────────────────────────────────────── */}
+        {/* ─── DONATE ────────────────────────────────────────────────────────────── */}
         <section
           id="donate"
           className="space-panel-white backdrop-blur-sm py-24 px-6 md:px-20 flex flex-col lg:flex-row gap-10 items-start justify-center"
@@ -739,7 +733,7 @@ function HomeContent() {
 
         <NebulaDivider />
 
-        {/* ─── GALLERY ──────────────────────────────────────────────────── */}
+        {/* ─── GALLERY ───────────────────────────────────────────────────────────── */}
         <section className="space-panel backdrop-blur-sm px-6 md:px-20 py-24">
           <h2 className="text-3xl font-bold text-center mb-4">
             Our Impact in <span className="text-[#6D5CAE]">Action</span>
@@ -751,7 +745,7 @@ function HomeContent() {
           <GalleryGrid />
         </section>
 
-        {/* ─── VOLUNTEER ────────────────────────────────────────────────── */}
+        {/* ─── VOLUNTEER ──────────────────────────────────────────────────────── */}
         <VolunteerSection ref={volunteerRef} />
 
         {/* Per-program interest form modal (opened from program tabs) */}
