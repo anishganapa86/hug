@@ -63,7 +63,7 @@ function StatNumber({ field }: { field: string }) {
     const obj = { val: 0 };
     const tween = gsap.to(obj, {
       val: end,
-      duration: 2,
+      duration: 2.6,
       ease: "power1.out",
       scrollTrigger: {
         trigger: el,
@@ -131,8 +131,8 @@ function HomeContent() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.55,
-            stagger: 0.12,
+            duration: 0.8,
+            stagger: 0.18,
             ease: "power2.out",
             scrollTrigger: { trigger: aboutValuesRef.current, start: "top 85%" },
           }
@@ -146,8 +146,8 @@ function HomeContent() {
           {
             opacity: 1,
             x: 0,
-            duration: 0.55,
-            stagger: 0.13,
+            duration: 0.8,
+            stagger: 0.19,
             ease: "power2.out",
             scrollTrigger: { trigger: donateCardsRef.current, start: "top 85%" },
           }
@@ -471,8 +471,8 @@ function HomeContent() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{
-                      duration: 0.5,
-                      delay: i * 0.1,
+                      duration: 0.75,
+                      delay: i * 0.15,
                       ease: "easeOut",
                     }}
                     className="rounded-2xl border border-purple-100 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
