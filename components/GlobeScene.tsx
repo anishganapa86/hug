@@ -13,6 +13,7 @@ interface Chapter {
 const CHAPTERS: Chapter[] = [
   { lat: 36.7, lon: -119.4, label: "California Chapter" },
   { lat: 38.8, lon: -116.4, label: "Nevada Chapter" },
+  { lat: 40.1, lon: -74.7, label: "New Jersey Chapter" },
   { lat: 20.6, lon: 78.9, label: "India Chapter" },
 ];
 
@@ -182,48 +183,6 @@ function useEarthTexture(isMobile: boolean): THREE.Texture {
   return texture;
 }
 
-const ATMO_VERT = `
-  varying vec3 vNormal;
-  varying vec3 vPosition;
-  void main() {
-    vNormal = normalize(normalMatrix * normal);
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    vPosition = mv.xyz;
-    gl_Position = projectionMatrix * mv;
-  }
-`;
-const ATMO_FRAG = `
-  uniform vec3 glowColor;
-  varying vec3 vNormal;
-  varying vec3 vPosition;
-  void main() {
-    vec3 viewDir = normalize(-vPosition);
-    float intensity = pow(1.0 - abs(dot(vNormal, viewDir)), 3.0);
-    gl_FragColor = vec4(glowColor, intensity);
-  }
-`;
-
-function Atmosphere() {
-  const uniforms = useMemo(
-    () => ({ glowColor: { value: new THREE.Color("#6D5CAE") } }),
-    []
-  );
-  return (
-    <mesh scale={1.16}>
-      <sphereGeometry args={[1.5, 64, 64]} />
-      <shaderMaterial
-        side={THREE.BackSide}
-        blending={THREE.AdditiveBlending}
-        transparent
-        depthWrite={false}
-        uniforms={uniforms}
-        vertexShader={ATMO_VERT}
-        fragmentShader={ATMO_FRAG}
-      />
-    </mesh>
-  );
-}
-
 function Marker({
   position,
   label,
@@ -307,7 +266,6 @@ function Scene({ reduced, isMobile }: { reduced: boolean; isMobile: boolean }) {
       <ambientLight intensity={1.0} />
       <directionalLight position={[3, 2, 5]} intensity={1.5} />
       <directionalLight position={[-4, 1, -2]} intensity={0.45} color="#ffffff" />
-      <Atmosphere />
       {/* rotation framed so North America (California/Nevada pins) faces front */}
       <group
         ref={groupRef}
