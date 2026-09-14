@@ -130,7 +130,7 @@ export default function GalleryGrid() {
               {lightboxErr ? (
                 <div className="absolute inset-0 shimmer flex flex-col items-center justify-center text-[#6D5CAE]">
                   <span className="text-sm font-medium">
-                    {ITEMS[active].caption} — photo coming soon
+                    {ITEMS[active].caption}: photo coming soon
                   </span>
                 </div>
               ) : (
