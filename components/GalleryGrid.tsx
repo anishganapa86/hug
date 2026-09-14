@@ -49,7 +49,7 @@ function Tile({
       initial={{ opacity: 0, scale: 0.92, filter: "blur(8px)" }}
       whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.12, ease: "easeOut" }}
+      transition={{ duration: 0.85, delay: index * 0.18, ease: "easeOut" }}
       className={`group relative w-full overflow-hidden rounded-2xl shadow-sm border border-purple-50 block ${LAYOUT[index]}`}
     >
       {errored ? (
