@@ -26,6 +26,9 @@ const PARTNERS: Partner[] = [
 
 function PartnerLogo({ partner }: { partner: Partner }) {
   const [errored, setErrored] = useState(false);
+  // Hover doesn't exist on touch devices, so a tap toggles the same
+  // full-color reveal that :hover gives on desktop.
+  const [revealed, setRevealed] = useState(false);
 
   if (errored) {
     return (
@@ -36,14 +39,19 @@ function PartnerLogo({ partner }: { partner: Partner }) {
   }
 
   return (
-    <div className="mx-8 flex h-14 w-[150px] items-center justify-center">
+    <div
+      className="mx-8 flex h-14 w-[150px] items-center justify-center cursor-pointer"
+      onClick={() => setRevealed((r) => !r)}
+    >
       <Image
         src={partner.file}
         alt={partner.name}
         width={160}
         height={60}
         onError={() => setErrored(true)}
-        className="max-h-12 md:max-h-[56px] max-w-[150px] w-auto object-contain grayscale opacity-80 transition duration-300 hover:grayscale-0 hover:opacity-100"
+        className={`max-h-12 md:max-h-[56px] max-w-[150px] w-auto object-contain transition duration-300 hover:grayscale-0 hover:opacity-100 ${
+          revealed ? "grayscale-0 opacity-100" : "grayscale opacity-80"
+        }`}
       />
     </div>
   );
