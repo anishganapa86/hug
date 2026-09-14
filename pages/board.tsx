@@ -64,7 +64,7 @@ export default function BoardPage() {
         <title>Our Board | HUG Foundation</title>
         <meta
           name="description"
-          content="Meet the student leaders behind HUG Foundation — the board members driving our hygiene, education, and warmth programs forward."
+          content="Meet the student leaders behind HUG Foundation, the board members driving our hygiene, education, and warmth programs forward."
         />
       </Head>
 
@@ -91,7 +91,7 @@ export default function BoardPage() {
               Our <span className="text-[#6D5CAE]">Board</span>
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              The student leaders steering HUG Foundation — building a brighter
+              The student leaders steering HUG Foundation, building a brighter
               future one HUG at a time.
             </p>
           </motion.div>
