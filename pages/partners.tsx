@@ -127,7 +127,7 @@ export default function PartnersPage() {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
               onClick={() => setContactOpen(true)}
-              className="bg-[#6D5CAE] text-white px-8 py-3.5 rounded-xl font-semibold shadow-md"
+              className="bg-[#6D5CAE] text-white px-8 py-3.5 rounded-xl font-semibold"
             >
               Start a Partnership
             </motion.button>
