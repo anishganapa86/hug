@@ -198,7 +198,7 @@ function HomeContent() {
         <title>HUG Foundation</title>
         <meta
           name="description"
-          content="Helping Underprivileged Groups — Henderson, NV non-profit empowering communities through education, wellness, and compassionate outreach."
+          content="Helping Underprivileged Groups: a Henderson, NV non-profit empowering communities through education, wellness, and compassionate outreach."
         />
       </Head>
 
@@ -451,13 +451,13 @@ function HomeContent() {
                       desc: "Making lasting differences in the communities we serve",
                     },
                   ].map(({ title, desc }) => (
-                    <li key={title} className="flex items-start gap-4">
-                      <span className="value-check grid place-items-center w-9 h-9 rounded-xl bg-purple-100 text-[#6D5CAE] shrink-0 shadow-[0_0_16px_rgba(109,92,174,0.28)] ring-1 ring-[#6D5CAE]/15">
+                    <li key={title} className="flex items-start gap-3.5">
+                      <span className="value-check mt-0.5 grid place-items-center w-6 h-6 rounded-full bg-purple-50 text-[#6D5CAE] shrink-0">
                         <svg
-                          className="w-5 h-5"
+                          className="w-3.5 h-3.5"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2.5"
+                          strokeWidth="3"
                           viewBox="0 0 24 24"
                         >
                           <path
@@ -467,11 +467,11 @@ function HomeContent() {
                           />
                         </svg>
                       </span>
-                      <span className="pt-1 leading-relaxed">
+                      <span className="leading-relaxed">
                         <strong className="font-semibold text-[#1d1d1f]">
                           {title}
-                        </strong>{" "}
-                        — <span className="text-gray-600">{desc}</span>
+                        </strong>
+                        <span className="text-gray-600">{" "}{desc}</span>
                       </span>
                     </li>
                   ))}
@@ -496,27 +496,20 @@ function HomeContent() {
                 ].map(({ title, body }, i) => (
                   <motion.div
                     key={title}
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{
-                      duration: 0.6,
-                      delay: i * 0.12,
+                      duration: 0.5,
+                      delay: i * 0.1,
                       ease: "easeOut",
                     }}
-                    whileHover={{
-                      y: -6,
-                      transition: { type: "spring", stiffness: 300, damping: 20 },
-                    }}
-                    className="group relative overflow-hidden rounded-2xl border border-purple-100/70 bg-white/70 backdrop-blur-md p-6 shadow-[0_6px_28px_-10px_rgba(109,92,174,0.22)] transition-shadow duration-300 hover:shadow-[0_22px_60px_-16px_rgba(109,92,174,0.5)]"
+                    className="rounded-2xl border border-purple-100 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
                   >
-                    {/* hover glow */}
-                    <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-[#9d8fd6]/0 blur-2xl transition-colors duration-300 group-hover:bg-[#9d8fd6]/25" />
-                    <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-transparent transition group-hover:ring-[#6D5CAE]/30" />
-                    <h4 className="relative font-semibold text-[#6D5CAE] mb-2 text-lg">
+                    <h4 className="font-semibold text-[#6D5CAE] mb-2 text-lg">
                       {title}
                     </h4>
-                    <p className="relative text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       {body}
                     </p>
                   </motion.div>
@@ -548,7 +541,7 @@ function HomeContent() {
 
         <NebulaDivider />
 
-        {/* ─── PROGRAMS (tabs) ──────────────────────────────────────────────── */}
+        {/* ─── PROGRAMS (tabs) ───────────────────────────────────────────────────── */}
         <section
           id="programs"
           className="space-panel backdrop-blur-sm px-6 md:px-20 py-24"
@@ -564,7 +557,7 @@ function HomeContent() {
           <ProgramTabs onApply={openProgram} />
         </section>
 
-        {/* ─── DONATE ────────────────────────────────────────────────────────────── */}
+        {/* ─── DONATE ───────────────────────────────────────────────────────────── */}
         <section
           id="donate"
           className="space-panel-white backdrop-blur-sm py-24 px-6 md:px-20 flex flex-col lg:flex-row gap-10 items-start justify-center"
@@ -716,8 +709,8 @@ function HomeContent() {
                       recovering from homelessness, addiction, and poverty in Las
                       Vegas. From warm jackets to clean shirts, every piece of
                       clothing you donated reached someone who needed it
-                      most—men, women, and children striving to rebuild their
-                      lives. These clothes don&apos;t just keep people warm— they
+                      most, men, women, and children striving to rebuild their
+                      lives. These clothes don&apos;t just keep people warm. They
                       offer confidence for job interviews, comfort during tough
                       times, and a reminder that they are not forgotten. Your
                       support allows HUG Foundation to continue partnering with
@@ -733,7 +726,7 @@ function HomeContent() {
 
         <NebulaDivider />
 
-        {/* ─── GALLERY ───────────────────────────────────────────────────────────── */}
+        {/* ─── GALLERY ──────────────────────────────────────────────────────────────────── */}
         <section className="space-panel backdrop-blur-sm px-6 md:px-20 py-24">
           <h2 className="text-3xl font-bold text-center mb-4">
             Our Impact in <span className="text-[#6D5CAE]">Action</span>
