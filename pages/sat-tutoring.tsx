@@ -73,7 +73,7 @@ export default function SATTutoring() {
       </Head>
 
       <Layout>
-        {/* ─── HERO ───────────────────────────────────────────────────── */}
+        {/* ─── HERO ────────────────────────────────────────────────────────────── */}
         <section className="relative flex flex-col lg:flex-row items-center justify-between px-6 md:px-12 lg:px-20 pt-32 pb-20 overflow-hidden">
           <div
             className="absolute inset-0 pointer-events-none"
@@ -106,7 +106,7 @@ export default function SATTutoring() {
             </h1>
             <p className="text-gray-600 mb-8 text-lg leading-relaxed">
               We believe that a student&apos;s SAT score should reflect their
-              potential—not their family&apos;s income. That&apos;s why we provide
+              potential, not their family&apos;s income. That&apos;s why we provide
               personalized, high-quality SAT tutoring completely free of charge.
             </p>
             <motion.button
@@ -115,7 +115,7 @@ export default function SATTutoring() {
               onClick={() => setSignupOpen(true)}
               className="bg-[#6D5CAE] text-white px-7 py-3 rounded-lg shadow-md font-medium"
             >
-              Sign Up Now — It&apos;s Free
+              Sign Up Now: It&apos;s Free
             </motion.button>
           </motion.div>
 
@@ -140,7 +140,7 @@ export default function SATTutoring() {
           </motion.div>
         </section>
 
-        {/* ─── ANIMATED STAT ─────────────────────────────────────────── */}
+        {/* ─── ANIMATED STAT ───────────────────────────────────────────── */}
         <section className="space-panel-white backdrop-blur-sm py-14 px-6 md:px-20">
           <div
             ref={statRef}
@@ -148,7 +148,7 @@ export default function SATTutoring() {
           >
             {[
               { value: "1500+", label: "Avg. tutor SAT score" },
-              { value: "100%", label: "Free — no hidden costs" },
+              { value: "100%", label: "Free, no hidden costs" },
               { value: "1-on-1", label: "Personalized sessions" },
             ].map(({ value, label }) => (
               <div
@@ -164,7 +164,7 @@ export default function SATTutoring() {
           </div>
         </section>
 
-        {/* ─── INCOME–SCORE ──────────────────────────────────────────── */}
+        {/* ─── INCOME–SCORE ──────────────────────────────────────────────── */}
         <section className="px-6 md:px-20 py-20 space-panel backdrop-blur-sm">
           <h2 className="text-3xl font-bold text-center mb-4">
             Breaking the{" "}
@@ -173,12 +173,12 @@ export default function SATTutoring() {
           <p className="text-center text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Studies show a clear correlation between household income and SAT
             scores. Higher income often means access to costly prep classes and
-            private tutoring—leaving low-income students at a disadvantage. We
+            private tutoring, leaving low-income students at a disadvantage. We
             are here to change that narrative.
           </p>
         </section>
 
-        {/* ─── HOW WE HELP ───────────────────────────────────────────── */}
+        {/* ─── HOW WE HELP ────────────────────────────────────────────────── */}
         <section className="px-6 md:px-20 py-24 space-panel-white backdrop-blur-sm">
           <h2 className="text-3xl font-bold text-center mb-14">
             Our <span className="text-[#6D5CAE]">Tutoring Program</span>
@@ -202,7 +202,7 @@ export default function SATTutoring() {
               },
               {
                 title: "Personalized Prep",
-                body: "We adapt tutoring to each student's strengths, weaknesses, and goals—no one-size-fits-all.",
+                body: "We adapt tutoring to each student's strengths, weaknesses, and goals, with no one-size-fits-all approach.",
                 icon: (
                   <path
                     strokeLinecap="round"
@@ -245,7 +245,7 @@ export default function SATTutoring() {
           </div>
         </section>
 
-        {/* ─── CTA ───────────────────────────────────────────────────── */}
+        {/* ─── CTA ──────────────────────────────────────────────────────── */}
         <section className="px-6 md:px-20 py-24 space-panel backdrop-blur-sm text-center">
           <h2 className="text-3xl font-bold mb-4">
             Ready to Boost Your SAT Score?
