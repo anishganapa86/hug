@@ -196,6 +196,10 @@ function Marker({
 }) {
   const haloRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
+  // Touch devices don't fire pointerover/pointerout reliably, so a tap
+  // toggles the label independently of hover.
+  const [tapped, setTapped] = useState(false);
+  const showLabel = hovered || tapped;
 
   useFrame(({ clock }) => {
     if (!haloRef.current) return;
@@ -228,6 +232,11 @@ function Marker({
           setHovered(false);
           onHover(false);
         }}
+        onClick={(e) => {
+          e.stopPropagation();
+          setTapped((t) => !t);
+          onHover(true);
+        }}
       >
         <sphereGeometry args={[0.05, 16, 16]} />
         <meshBasicMaterial color="#f3e8ff" />
@@ -237,7 +246,7 @@ function Marker({
         <sphereGeometry args={[0.03, 12, 12]} />
         <meshBasicMaterial color="#a855f7" />
       </mesh>
-      {hovered && (
+      {showLabel && (
         <Html center distanceFactor={6} style={{ pointerEvents: "none" }}>
           <div className="whitespace-nowrap rounded-full bg-[#1d1d1f] px-3 py-1 text-xs font-medium text-white shadow-lg -translate-y-7">
             {label}
