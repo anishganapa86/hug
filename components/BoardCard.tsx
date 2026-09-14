@@ -34,7 +34,7 @@ export default function BoardCard({
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay: (index % 3) * 0.12, ease: "easeOut" }}
+      transition={{ duration: 0.85, delay: (index % 3) * 0.18, ease: "easeOut" }}
       whileHover={{ y: -8 }}
       className="group relative space-panel-white rounded-2xl border border-purple-50 shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-[0_18px_50px_-12px_rgba(109,92,174,0.45)]"
     >
