@@ -59,7 +59,7 @@ export default function PartnersPage() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.95, ease: "easeOut" }}
             className="max-w-5xl mx-auto space-panel-white border border-purple-50 rounded-3xl shadow-sm overflow-hidden backdrop-blur-sm"
           >
             <div className="grid md:grid-cols-2">
@@ -107,7 +107,7 @@ export default function PartnersPage() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.95, ease: "easeOut" }}
             className="max-w-3xl mx-auto text-center rounded-3xl p-10 md:p-14 relative overflow-hidden"
             style={{
               background:
