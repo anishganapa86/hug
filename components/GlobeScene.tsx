@@ -305,7 +305,7 @@ export default function GlobeScene() {
       initial={{ opacity: 0, scale: 0.85 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: "easeOut" }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
       style={{ width: "100%", height: "100%" }}
     >
       <Canvas
