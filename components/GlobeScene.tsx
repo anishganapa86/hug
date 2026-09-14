@@ -312,6 +312,7 @@ export default function GlobeScene() {
         camera={{ position: [0, 0, 4.2], fov: 45 }}
         gl={{ alpha: true, antialias: true }}
         dpr={[1, 1.8]}
+        style={{ overflow: "visible" }}
       >
         <Scene reduced={reduced} isMobile={isMobile} />
       </Canvas>
