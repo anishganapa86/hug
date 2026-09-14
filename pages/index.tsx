@@ -137,18 +137,6 @@ function HomeContent() {
             scrollTrigger: { trigger: aboutValuesRef.current, start: "top 85%" },
           }
         );
-        gsap.fromTo(
-          aboutValuesRef.current.querySelectorAll(".value-check"),
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.45,
-            stagger: 0.12,
-            ease: "back.out(2)",
-            scrollTrigger: { trigger: aboutValuesRef.current, start: "top 85%" },
-          }
-        );
       }
 
       if (donateCardsRef.current) {
@@ -401,15 +389,12 @@ function HomeContent() {
           <div className="relative max-w-6xl mx-auto">
             {/* heading block */}
             <div className="text-center mb-16 md:mb-20">
-              <span className="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-[#6D5CAE] mb-5">
-                <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#6D5CAE]" />
+              <span className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-[#6D5CAE] mb-4">
                 Who We Are
-                <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#6D5CAE]" />
               </span>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-5">
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
                 About <span className="text-[#6D5CAE]">HUG Foundation</span>
               </h2>
-              <div className="mx-auto h-[3px] w-24 rounded-full bg-gradient-to-r from-[#9d8fd6] to-[#6D5CAE] shadow-[0_0_14px_rgba(109,92,174,0.6)] mb-7" />
               <Editable
                 as="p"
                 field="aboutIntro"
@@ -451,22 +436,8 @@ function HomeContent() {
                       desc: "Making lasting differences in the communities we serve",
                     },
                   ].map(({ title, desc }) => (
-                    <li key={title} className="flex items-start gap-3.5">
-                      <span className="value-check mt-0.5 grid place-items-center w-6 h-6 rounded-full bg-purple-50 text-[#6D5CAE] shrink-0">
-                        <svg
-                          className="w-3.5 h-3.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4.5 12.75l6 6 9-13.5"
-                          />
-                        </svg>
-                      </span>
+                    <li key={title} className="value-item flex items-baseline gap-3">
+                      <span className="mt-[3px] w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
                       <span className="leading-relaxed">
                         <strong className="font-semibold text-[#1d1d1f]">
                           {title}
@@ -520,9 +491,9 @@ function HomeContent() {
         </section>
 
         {/* ─── GLOBE ───────────────────────────────────────────────────────────── */}
-        <section className="space-panel-white backdrop-blur-sm py-20 px-6 md:px-20 overflow-hidden">
+        <section className="space-panel-white backdrop-blur-sm py-20 px-6 md:px-20">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            <div className="w-full md:w-1/2 h-64 md:h-80 relative">
+            <div className="w-full md:w-1/2 h-64 md:h-80 relative overflow-visible">
               <GlobeScene />
             </div>
             <div className="md:w-1/2 text-center md:text-left">
