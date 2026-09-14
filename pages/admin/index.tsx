@@ -89,7 +89,7 @@ export default function AdminPage() {
               className="rounded"
             />
             <span className="font-semibold text-[#6D5CAE]">
-              HUG Foundation — Admin
+              HUG Foundation Admin
             </span>
           </div>
           <div className="flex items-center gap-4">
