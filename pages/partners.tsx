@@ -108,12 +108,7 @@ export default function PartnersPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.95, ease: "easeOut" }}
-            className="max-w-3xl mx-auto text-center rounded-3xl p-10 md:p-14 relative overflow-hidden"
-            style={{
-              backgroundColor: "#ffffff",
-              backgroundImage:
-                "radial-gradient(ellipse at top, rgba(157,143,214,0.22) 0%, #ffffff 70%)",
-            }}
+            className="max-w-3xl mx-auto text-center rounded-3xl p-10 md:p-14 bg-white"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-3">
               Become a <span className="text-[#6D5CAE]">Partner</span>
