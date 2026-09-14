@@ -110,8 +110,9 @@ export default function PartnersPage() {
             transition={{ duration: 0.95, ease: "easeOut" }}
             className="max-w-3xl mx-auto text-center rounded-3xl p-10 md:p-14 relative overflow-hidden"
             style={{
-              background:
-                "radial-gradient(ellipse at top, rgba(157,143,214,0.18) 0%, rgba(255,255,255,0.85) 70%)",
+              backgroundColor: "#ffffff",
+              backgroundImage:
+                "radial-gradient(ellipse at top, rgba(157,143,214,0.22) 0%, #ffffff 70%)",
             }}
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-3">
