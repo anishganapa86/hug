@@ -28,8 +28,8 @@ export default function SATTutoring() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          stagger: 0.12,
+          duration: 0.85,
+          stagger: 0.18,
           ease: "power2.out",
           scrollTrigger: {
             trigger: featuresRef.current,
@@ -46,8 +46,8 @@ export default function SATTutoring() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.55,
-          stagger: 0.15,
+          duration: 0.8,
+          stagger: 0.22,
           ease: "power2.out",
           scrollTrigger: {
             trigger: statRef.current,
