@@ -48,7 +48,7 @@ export const DEFAULT_CONTENT: SiteContent = {
   programs: [
     {
       title: "HUG for Hygiene",
-      desc: "Hygiene packets — soap, shampoo, toothbrush, toothpaste, deodorant, and sanitary items — for people facing homelessness or hardship.",
+      desc: "Hygiene packets, including soap, shampoo, toothbrush, toothpaste, deodorant, and sanitary items, for people facing homelessness or hardship.",
       provides:
         "Each $25 assembles a complete hygiene packet that restores dignity, comfort, and confidence to someone in need.",
     },
@@ -60,7 +60,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     },
     {
       title: "HUG for Warmth",
-      desc: "Clothing and blanket drives distributing warmth to families in need — proudly partnered with Vegas Stronger.",
+      desc: "Clothing and blanket drives distributing warmth to families in need, proudly partnered with Vegas Stronger.",
       provides:
         "Warm jackets, blankets, and clean clothing delivered directly to families facing hardship across the valley.",
     },
