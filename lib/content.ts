@@ -36,11 +36,11 @@ export const DEFAULT_CONTENT: SiteContent = {
   heroHeadlineHighlight: "Underprivileged",
   heroHeadlinePost: " Groups",
   heroSubtitle:
-    "Based in Henderson, Nevada, empowering underserved communities through education, wellness, and compassionate outreach.",
+    "A Henderson, Nevada non-profit run by students. We assemble hygiene packets, run clothing drives, and provide free SAT tutoring.",
   statPrograms: "4",
   statVolunteers: "50",
-  statItems: "10k+",
-  statEstablished: "EST'24",
+  statItems: "10,000+",
+  statEstablished: "2024",
   aboutIntro:
     "A distinguished 501(c)(3) non-profit organization devoted to empowering underserved communities through education, wellness, and compassionate outreach.",
   aboutMission:
@@ -50,25 +50,25 @@ export const DEFAULT_CONTENT: SiteContent = {
       title: "HUG for Hygiene",
       desc: "Hygiene packets, including soap, shampoo, toothbrush, toothpaste, deodorant, and sanitary items, for people facing homelessness or hardship.",
       provides:
-        "Each $25 assembles a complete hygiene packet that restores dignity, comfort, and confidence to someone in need.",
+        "Each $25 buys the supplies for one complete packet, assembled by volunteers and handed directly to someone who needs it.",
     },
     {
       title: "HUG for Education",
-      desc: "Tutoring, mentorship, SAT prep, and educational resources for underserved students who deserve a fair shot.",
+      desc: "Free tutoring, mentorship, and SAT prep for students who can't afford private tutoring, plus school supplies where they're needed.",
       provides:
-        "Free 1-on-1 tutoring sessions and test-prep materials for students who would otherwise go without.",
+        "Free 1-on-1 tutoring sessions and test-prep materials from tutors who scored 1500+ on the SAT.",
     },
     {
       title: "HUG for Warmth",
-      desc: "Clothing and blanket drives distributing warmth to families in need, proudly partnered with Vegas Stronger.",
+      desc: "Clothing and blanket drives that get warm clothes to families facing hardship, in partnership with Vegas Stronger.",
       provides:
-        "Warm jackets, blankets, and clean clothing delivered directly to families facing hardship across the valley.",
+        "Jackets, blankets, and clean clothing, sorted by volunteers and delivered where they're needed most.",
     },
     {
       title: "International Scholars Program",
-      desc: "Supporting and uplifting students globally through mentorship, resources, and opportunity.",
+      desc: "Mentorship and school supplies for students outside the valley, from India to New Jersey.",
       provides:
-        "Mentorship and educational support that reaches motivated students across the world, wherever they are.",
+        "Mentoring sessions and resources that help motivated students keep learning, wherever they live.",
     },
   ],
 };

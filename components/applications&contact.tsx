@@ -98,10 +98,10 @@ const VolunteerSection = forwardRef<HTMLElement>((_, ref) => {
             </h2>
             <ul className="space-y-3 text-gray-700">
               {[
-                "Develop valuable leadership skills",
-                "Make a direct impact in your community",
-                "Flexible scheduling for students",
-                "Letters of recommendation for dedicated volunteers",
+                "Leadership experience you can actually put on a résumé",
+                "Service hours and letters of recommendation for dedicated volunteers",
+                "Flexible scheduling around school",
+                "A real say in what we do next: new program ideas come from volunteers",
               ].map((item) => (
                 <li key={item} className="leading-relaxed">
                   {item}

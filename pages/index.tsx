@@ -50,7 +50,7 @@ function StatNumber({ field }: { field: string }) {
     if (editing) return;
     const el = ref.current;
     if (!el) return;
-    const match = value.match(/^(\d+)(.*)$/);
+    const match = value.match(/^([\d,]+)(.*)$/);
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -58,7 +58,7 @@ function StatNumber({ field }: { field: string }) {
       el.textContent = value;
       return;
     }
-    const end = parseInt(match[1], 10);
+    const end = parseInt(match[1].replace(/,/g, ""), 10);
     const suffix = match[2];
     const obj = { val: 0 };
     const tween = gsap.to(obj, {
@@ -71,7 +71,7 @@ function StatNumber({ field }: { field: string }) {
         toggleActions: "play none none none",
       },
       onUpdate() {
-        el.textContent = Math.round(obj.val) + suffix;
+        el.textContent = Math.round(obj.val).toLocaleString("en-US") + suffix;
       },
     });
     return () => {
@@ -84,6 +84,29 @@ function StatNumber({ field }: { field: string }) {
     return <Editable as="span" field={field} />;
   }
   return <span ref={ref}>{value}</span>;
+}
+
+/** Subtle fade-and-rise when a block scrolls into view. */
+function Reveal({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
 }
 
 function HomeContent() {
@@ -127,12 +150,12 @@ function HomeContent() {
       if (aboutValuesRef.current) {
         gsap.fromTo(
           aboutValuesRef.current.querySelectorAll("li"),
-          { opacity: 0, y: 24 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.18,
+            duration: 0.6,
+            stagger: 0.1,
             ease: "power2.out",
             scrollTrigger: { trigger: aboutValuesRef.current, start: "top 85%" },
           }
@@ -142,12 +165,12 @@ function HomeContent() {
       if (donateCardsRef.current) {
         gsap.fromTo(
           donateCardsRef.current.querySelectorAll(".impact-card"),
-          { opacity: 0, x: 60 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
-            x: 0,
-            duration: 0.8,
-            stagger: 0.19,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
             ease: "power2.out",
             scrollTrigger: { trigger: donateCardsRef.current, start: "top 85%" },
           }
@@ -186,7 +209,7 @@ function HomeContent() {
         <title>HUG Foundation</title>
         <meta
           name="description"
-          content="Helping Underprivileged Groups: a Henderson, NV non-profit empowering communities through education, wellness, and compassionate outreach."
+          content="HUG Foundation is a student-run Henderson, NV non-profit. We assemble hygiene packets, run clothing drives with Vegas Stronger, and provide free SAT tutoring."
         />
       </Head>
 
@@ -222,9 +245,9 @@ function HomeContent() {
 
           {/* Text */}
           <motion.div
-            initial={{ opacity: 0, y: 32, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="max-w-xl relative z-10"
           >
             <Editable
@@ -256,22 +279,18 @@ function HomeContent() {
             />
 
             <div className="flex flex-wrap gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={() => scrollToSection("donate")}
-                className="bg-[#6D5CAE] text-white px-7 py-3 rounded-lg shadow-md font-medium"
+                className="bg-[#6D5CAE] text-white px-7 py-3 rounded-lg shadow-md font-medium hover:bg-[#5a4a99] transition-colors"
               >
                 Get Involved
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              </button>
+              <button
                 onClick={() => scrollToSection("about")}
-                className="border border-white/70 text-white px-7 py-3 rounded-lg font-medium bg-white/10 backdrop-blur-sm hover:bg-white/20 transition"
+                className="border border-white/70 text-white px-7 py-3 rounded-lg font-medium bg-white/10 hover:bg-white/20 transition-colors"
               >
                 Learn More
-              </motion.button>
+              </button>
             </div>
           </motion.div>
 
@@ -279,13 +298,10 @@ function HomeContent() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="mt-14 lg:mt-0 relative z-10 flex justify-center lg:justify-end w-full lg:w-[44%]"
           >
-            <div
-              className="relative"
-              style={{ animation: "heroFloat 4s ease-in-out infinite" }}
-            >
+            <div className="relative">
               {/* purple glow behind the bright logo card */}
               <div
                 aria-hidden="true"
@@ -327,39 +343,22 @@ function HomeContent() {
         </section>
 
         {/* ─── STATS ─────────────────────────────────────────────────────────────── */}
-        <section
+        <motion.section
           id="stats"
-          className="space-panel-white backdrop-blur-sm py-14 px-6 md:px-20"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="space-panel-white backdrop-blur-sm py-16 px-6 md:px-20 border-b border-purple-100/70"
         >
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x-0 md:divide-x divide-purple-100">
-              <div className="text-center px-4 py-4 border-b md:border-b-0 border-purple-100">
-                <p className="text-3xl md:text-4xl font-bold text-[#6D5CAE]">
-                  <StatNumber field="statPrograms" />
-                </p>
-                <p className="text-sm text-gray-500 mt-1">Programs</p>
-              </div>
-              <div className="text-center px-4 py-4 border-b md:border-b-0 border-purple-100">
-                <p className="text-3xl md:text-4xl font-bold text-[#6D5CAE]">
-                  <StatNumber field="statVolunteers" />
-                </p>
-                <p className="text-sm text-gray-500 mt-1">Active Volunteers</p>
-              </div>
-              <div className="text-center px-4 py-4">
-                <p className="text-3xl md:text-4xl font-bold text-[#6D5CAE]">
-                  <StatNumber field="statItems" />
-                </p>
-                <p className="text-sm text-gray-500 mt-1">Items Donated</p>
-              </div>
-              <div className="text-center px-4 py-4">
-                <p className="text-3xl md:text-4xl font-bold text-[#6D5CAE]">
-                  <Editable as="span" field="statEstablished" />
-                </p>
-                <p className="text-sm text-gray-500 mt-1">Established</p>
-              </div>
-            </div>
-          </div>
-        </section>
+          <p className="max-w-3xl mx-auto text-center text-xl md:text-2xl font-medium leading-relaxed text-[#1d1d1f]">
+            Since <Editable as="span" field="statEstablished" className="font-semibold text-[#6D5CAE]" />, we&apos;ve run{" "}
+            <StatNumber field="statPrograms" /> programs with{" "}
+            <StatNumber field="statVolunteers" /> volunteers and put{" "}
+            <StatNumber field="statItems" /> items into the hands of people who
+            need them.
+          </p>
+        </motion.section>
 
         <NebulaDivider />
 
@@ -368,24 +367,6 @@ function HomeContent() {
           id="about"
           className="relative px-6 md:px-20 py-28 md:py-32 space-panel backdrop-blur-sm text-[#1d1d1f] overflow-hidden"
         >
-          {/* whisper-subtle cosmic accents (kept very light on the light bg) */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div
-              className="absolute -top-24 left-[15%] w-[38rem] h-[38rem] rounded-full opacity-60 nebula-drift"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(157,143,214,0.10) 0%, transparent 70%)",
-              }}
-            />
-            <div
-              className="absolute bottom-[-6rem] right-[12%] w-[32rem] h-[32rem] rounded-full opacity-60 nebula-drift-slow"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(109,92,174,0.08) 0%, transparent 70%)",
-              }}
-            />
-          </div>
-
           <div className="relative max-w-6xl mx-auto">
             {/* heading block */}
             <div className="text-center mb-16 md:mb-20">
@@ -449,7 +430,7 @@ function HomeContent() {
                 </ul>
               </div>
 
-              {/* Premium glass cards */}
+              {/* Info cards */}
               <div className="space-y-5">
                 {[
                   {
@@ -462,20 +443,12 @@ function HomeContent() {
                   },
                   {
                     title: "Holistic Approach",
-                    body: "We believe in addressing the whole person – their educational needs, physical well-being, and emotional support – creating comprehensive solutions.",
+                    body: "We believe in addressing the whole person, including their educational needs, physical well-being, and emotional support, to create comprehensive solutions.",
                   },
-                ].map(({ title, body }, i) => (
-                  <motion.div
+                ].map(({ title, body }) => (
+                  <div
                     key={title}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{
-                      duration: 0.75,
-                      delay: i * 0.15,
-                      ease: "easeOut",
-                    }}
-                    className="rounded-2xl border border-purple-100 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+                    className="rounded-2xl border border-purple-100 bg-white p-6 shadow-sm"
                   >
                     <h4 className="font-semibold text-[#6D5CAE] mb-2 text-lg">
                       {title}
@@ -483,7 +456,7 @@ function HomeContent() {
                     <p className="text-gray-600 text-sm leading-relaxed">
                       {body}
                     </p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -497,15 +470,18 @@ function HomeContent() {
               <GlobeScene />
             </div>
             <div className="md:w-1/2 text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                Making an impact in{" "}
-                <span className="text-[#6D5CAE]">Henderson, NV</span> and beyond
-              </h2>
-              <p className="text-gray-600 leading-relaxed">
-                From local clothing drives to SAT tutoring, every initiative we
-                run creates ripples of positive change throughout our community
-                and inspires future leaders to give back.
-              </p>
+              <Reveal>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                  Making an impact in{" "}
+                  <span className="text-[#6D5CAE]">Henderson, NV</span> and beyond
+                </h2>
+                <p className="text-gray-600 leading-relaxed">
+                  We started in July 2024 with a blanket drive for Vegas Stronger.
+                  Since then our chapters have spread to California, New Jersey,
+                  and India, with new drives and tutoring sessions running every
+                  quarter.
+                </p>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -517,13 +493,14 @@ function HomeContent() {
           id="programs"
           className="space-panel backdrop-blur-sm px-6 md:px-20 py-24"
         >
-          <h2 className="text-3xl font-bold text-center mb-4">
-            Our <span className="text-[#6D5CAE]">Programs</span>
-          </h2>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-14">
-            Four focused initiatives, each built to uplift a different part of
-            our community.
-          </p>
+          <Reveal>
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Our <span className="text-[#6D5CAE]">Programs</span>
+            </h2>
+            <p className="text-center text-gray-600 max-w-2xl mx-auto mb-14">
+              Four programs, run end-to-end by student volunteers.
+            </p>
+          </Reveal>
 
           <ProgramTabs onApply={openProgram} />
         </section>
@@ -563,19 +540,19 @@ function HomeContent() {
                 open: impact1Open,
                 setOpen: setImpact1Open,
                 heading: "$25 Provides",
-                body: "Essential school supplies for a student in need, supporting their educational journey.",
+                body: "One complete hygiene packet: soap, shampoo, toothbrush, toothpaste, deodorant, and sanitary items.",
               },
               {
                 open: impact2Open,
                 setOpen: setImpact2Open,
                 heading: "$100 Provides",
-                body: "An entire month of after-school programming for a child, including academic support and enrichment activities.",
+                body: "Four hygiene packets, plus a week of SAT tutoring and test-prep materials for three students.",
               },
               {
                 open: impact3Open,
                 setOpen: setImpact3Open,
                 heading: "Clothing Donations",
-                body: "Your donated clothing items go directly to families in need, providing warmth, comfort, and dignity.",
+                body: "Your donated clothing gets sorted and cleaned by volunteers, then handed directly to families through Vegas Stronger.",
               },
             ].map(({ heading, body, setOpen }) => (
               <div
@@ -627,17 +604,14 @@ function HomeContent() {
                   <>
                     <h3 className="text-lg font-semibold mb-4">$25 Impact</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      Thanks to a generous $25 donation, HUG Foundation assembled
-                      a complete hygiene packet filled with essentials such as
-                      soap, shampoo, conditioner, toothpaste, a toothbrush,
-                      deodorant, and sanitary items. For someone struggling with
-                      homelessness or financial hardship, these items are not just
-                      products they are tools for confidence, dignity, and self
-                      care. This single packet means someone can go to school work
-                      or an important meeting feeling fresh and respected. Your
-                      $25 doesn&apos;t just buy hygiene items, it creates a moment of
-                      hope and reminds someone in need that their community cares
-                      for them.
+                      A $25 donation covers the supplies for one complete
+                      hygiene packet: soap, shampoo, conditioner, toothpaste, a
+                      toothbrush, deodorant, and sanitary items. Volunteers
+                      assemble these by hand and hand them out at community
+                      outreach events. For someone who can&apos;t afford them, a
+                      packet means showing up to a job interview or a school day
+                      feeling clean. It&apos;s a small thing with an outsized
+                      difference, and $25 covers one entirely.
                     </p>
                   </>
                 )}
@@ -645,23 +619,15 @@ function HomeContent() {
                   <>
                     <h3 className="text-lg font-semibold mb-4">$100 Impact</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      At HUG Foundation, a $100 donation goes a long way. With
-                      just one contribution, we were able to provide 4 hygiene
-                      packets filled with essentials like soap, toothbrushes, and
-                      sanitary items. These packets were distributed during a
-                      community outreach event, helping people experiencing
-                      homelessness feel clean, cared for, and seen. That same
-                      $100 also helped support our SAT tutoring initiative. Three
-                      students received a full week of tutoring and access to test
-                      prep materials. These students, who otherwise would not have
-                      had access to quality support, were given a real chance to
-                      improve their scores and pursue college with confidence.
-                      Part of the donation also went toward expanding our outreach
-                      efforts. We printed flyers, delivered supplies, and reached
-                      more than 40 individuals in just one day. The impact of one
-                      donation stretched across hygiene, education, and community
-                      care. At HUG Foundation, every dollar is used to create
-                      meaningful, lasting change.
+                      Here&apos;s a real example of what $100 covered: four hygiene
+                      packets, handed out at a community outreach event to people
+                      experiencing homelessness. The same $100 paid for a week of
+                      SAT tutoring and test-prep materials for three students who
+                      couldn&apos;t have afforded a private tutor. What was left over
+                      went to printing flyers and delivering supplies, which let
+                      us reach more than 40 people in a single day. That&apos;s the
+                      whole breakdown. We publish it because we want donors to
+                      know exactly where their money goes.
                     </p>
                   </>
                 )}
@@ -671,22 +637,16 @@ function HomeContent() {
                       Clothing Donation Impact
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      Thanks to the generosity of our supporters, HUG Foundation
-                      collected over 1,000 articles of clothing through local
-                      drives, school partnerships, and neighborhood drop-off
-                      events. These clothes were sorted, cleaned, and carefully
-                      packed by our volunteers before being donated to Vegas
-                      Stronger, a nonprofit dedicated to helping individuals
-                      recovering from homelessness, addiction, and poverty in Las
-                      Vegas. From warm jackets to clean shirts, every piece of
-                      clothing you donated reached someone who needed it
-                      most, men, women, and children striving to rebuild their
-                      lives. These clothes don&apos;t just keep people warm. They
-                      offer confidence for job interviews, comfort during tough
-                      times, and a reminder that they are not forgotten. Your
-                      support allows HUG Foundation to continue partnering with
-                      organizations like Vegas Stronger, turning every closet
-                      clean out into a chance to change lives.
+                      Our clothing drives have collected over 1,000 articles of
+                      clothing through school partnerships and neighborhood
+                      drop-off events. Volunteers sorted and packed everything
+                      before donating it to Vegas Stronger, a nonprofit that
+                      helps people recovering from homelessness and addiction in
+                      Las Vegas. The donations included warm jackets, work-ready
+                      shirts, and everyday clothes for men, women, and children.
+                      We run these drives quarterly and are always accepting
+                      donations. If you have a closet to clean out, we&apos;ll make
+                      sure it reaches someone who needs it.
                     </p>
                   </>
                 )}
@@ -699,18 +659,21 @@ function HomeContent() {
 
         {/* ─── GALLERY ──────────────────────────────────────────────────────────────────── */}
         <section className="space-panel backdrop-blur-sm px-6 md:px-20 py-24">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            Our Impact in <span className="text-[#6D5CAE]">Action</span>
-          </h2>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-14">
-            Moments from our drives, tutoring sessions, and community outreach
-            across the valley.
-          </p>
+          <Reveal>
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Our Impact in <span className="text-[#6D5CAE]">Action</span>
+            </h2>
+            <p className="text-center text-gray-600 max-w-2xl mx-auto mb-14">
+              Photos from our drives, tutoring sessions, and outreach events.
+            </p>
+          </Reveal>
           <GalleryGrid />
         </section>
 
         {/* ─── VOLUNTEER ──────────────────────────────────────────────────────── */}
-        <VolunteerSection ref={volunteerRef} />
+        <Reveal>
+          <VolunteerSection ref={volunteerRef} />
+        </Reveal>
 
         {/* Per-program interest form modal (opened from program tabs) */}
         <ProgramFormModal

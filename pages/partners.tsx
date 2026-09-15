@@ -30,9 +30,9 @@ export default function PartnersPage() {
             }}
           />
           <motion.div
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative z-10"
           >
             <span className="inline-block px-3 py-1 bg-purple-100 text-[#6D5CAE] font-medium rounded-full text-sm mb-4 shadow-sm">
@@ -42,8 +42,8 @@ export default function PartnersPage() {
               Our <span className="text-[#6D5CAE]">Partners</span>
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              We collaborate with community organizations to create lasting
-              impact across Henderson and the greater Las Vegas area.
+              These are the organizations that make our drives and programs
+              possible across Henderson and the Las Vegas valley.
             </p>
           </motion.div>
         </section>
@@ -56,10 +56,10 @@ export default function PartnersPage() {
         {/* Vegas Stronger detail */}
         <section className="px-6 md:px-20 py-16">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.95, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="max-w-5xl mx-auto space-panel-white border border-purple-50 rounded-3xl shadow-sm overflow-hidden backdrop-blur-sm"
           >
             <div className="grid md:grid-cols-2">
@@ -77,8 +77,8 @@ export default function PartnersPage() {
                   comfort in a time of need. As of now, we assist Vegas Stronger
                   on a quarterly basis, partnering with other schools in the
                   Clark County district to achieve a set goal of donations
-                  ranging from shirts to shoes. HUG continues to strive for the
-                  warmth that everyone deserves.
+                  ranging from                  shirts to shoes. Our drives for Vegas Stronger still run every
+                  quarter, and they remain our closest partner.
                 </p>
               </div>
               <div className="grid grid-rows-2 gap-2 p-4">
@@ -104,29 +104,25 @@ export default function PartnersPage() {
         {/* Become a Partner */}
         <section className="px-6 md:px-20 pb-28">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.95, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="max-w-3xl mx-auto text-center rounded-3xl p-10 md:p-14 bg-white"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-3">
               Become a <span className="text-[#6D5CAE]">Partner</span>
             </h2>
             <p className="text-gray-600 mb-8 leading-relaxed max-w-xl mx-auto">
-              We&apos;re always looking to collaborate with organizations that
-              share our vision for a stronger, more inclusive community in
-              Henderson and beyond.
+              If your organization could use volunteers, donations, or a
+              partner for an event, we&apos;d like to hear from you.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 18 }}
+            <button
               onClick={() => setContactOpen(true)}
-              className="bg-[#6D5CAE] text-white px-8 py-3.5 rounded-xl font-semibold"
+              className="bg-[#6D5CAE] text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-[#5a4a99] transition-colors"
             >
               Start a Partnership
-            </motion.button>
+            </button>
           </motion.div>
         </section>
 

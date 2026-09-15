@@ -28,8 +28,8 @@ export default function SATTutoring() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          stagger: 0.18,
+          duration: 0.7,
+          stagger: 0.12,
           ease: "power2.out",
           scrollTrigger: {
             trigger: featuresRef.current,
@@ -46,8 +46,8 @@ export default function SATTutoring() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.22,
+          duration: 0.7,
+          stagger: 0.12,
           ease: "power2.out",
           scrollTrigger: {
             trigger: statRef.current,
@@ -68,7 +68,7 @@ export default function SATTutoring() {
         <title>SAT Tutoring | HUG Foundation</title>
         <meta
           name="description"
-          content="Free, high-quality SAT tutoring for underprivileged students. Breaking the income–score barrier with top tutors (1500+ scorers)."
+          content="Free, high-quality SAT tutoring for underprivileged students. Every tutor scored 1500+ on the SAT."
         />
       </Head>
 
@@ -85,9 +85,9 @@ export default function SATTutoring() {
 
           {/* Text */}
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="max-w-xl relative z-10"
           >
             <div className="inline-block px-3 py-1 bg-purple-100 text-[#6D5CAE] font-medium rounded-full text-sm mb-4 shadow-sm">
@@ -109,32 +109,29 @@ export default function SATTutoring() {
               potential, not their family&apos;s income. That&apos;s why we provide
               personalized, high-quality SAT tutoring completely free of charge.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => setSignupOpen(true)}
-              className="bg-[#6D5CAE] text-white px-7 py-3 rounded-lg shadow-md font-medium"
+              className="bg-[#6D5CAE] text-white px-7 py-3 rounded-lg shadow-md font-medium hover:bg-[#5a4a99] transition-colors"
             >
               Sign Up Now: It&apos;s Free
-            </motion.button>
+            </button>
           </motion.div>
 
           {/* Image */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="mt-14 lg:mt-0 relative z-10 flex justify-center lg:justify-end w-full lg:w-[42%]"
           >
             <div className="relative">
-              <div className="absolute -top-4 -left-4 w-full h-full bg-purple-100/70 rounded-2xl z-0" />
               <Image
                 src="/sat-students.jpg"
                 alt="Students studying for SAT"
                 width={480}
                 height={380}
                 priority
-                className="relative z-10 rounded-2xl shadow-2xl object-cover w-[280px] sm:w-[340px] md:w-[400px] lg:w-[440px]"
+                className="rounded-2xl shadow-2xl object-cover w-[280px] sm:w-[340px] md:w-[400px] lg:w-[440px]"
               />
             </div>
           </motion.div>
@@ -168,13 +165,14 @@ export default function SATTutoring() {
         <section className="px-6 md:px-20 py-20 space-panel backdrop-blur-sm">
           <h2 className="text-3xl font-bold text-center mb-4">
             Breaking the{" "}
-            <span className="text-[#6D5CAE]">Income–Score Barrier</span>
+            <span className="text-[#6D5CAE]">Income-Score Barrier</span>
           </h2>
           <p className="text-center text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Studies show a clear correlation between household income and SAT
-            scores. Higher income often means access to costly prep classes and
-            private tutoring, leaving low-income students at a disadvantage. We
-            are here to change that narrative.
+            A private tutor in the valley runs $50 to $100 an hour, and prep
+            courses cost even more. Students whose families can afford that get
+            a head start; students whose families can&apos;t are left competing
+            against it. Our tutors scored 1500+ themselves and volunteer their
+            time, so our students get the same prep without the price tag.
           </p>
         </section>
 
@@ -191,7 +189,7 @@ export default function SATTutoring() {
             {[
               {
                 title: "Top Scorers",
-                body: "Every tutor scored 1500+ on the SAT and knows what it takes to excel.",
+                body: "Every tutor scored 1500+ on the SAT, and most are students who just went through the process themselves.",
                 icon: (
                   <path
                     strokeLinecap="round"
@@ -201,8 +199,8 @@ export default function SATTutoring() {
                 ),
               },
               {
-                title: "Personalized Prep",
-                body: "We adapt tutoring to each student's strengths, weaknesses, and goals, with no one-size-fits-all approach.",
+                title: "1-on-1 Sessions",
+                body: "Tutoring is matched to each student. You work on the sections you're weakest in, at your own pace.",
                 icon: (
                   <path
                     strokeLinecap="round"
@@ -213,7 +211,7 @@ export default function SATTutoring() {
               },
               {
                 title: "Completely Free",
-                body: "Families never pay a cent. Access to quality SAT prep should be a right, not a privilege.",
+                body: "Tutors volunteer their time and we provide the materials. Families never get a bill.",
                 icon: (
                   <path
                     strokeLinecap="round"
@@ -251,18 +249,15 @@ export default function SATTutoring() {
             Ready to Boost Your SAT Score?
           </h2>
           <p className="text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Whether you&apos;re aiming for college scholarships or admissions, our
-            tutors are here to help you achieve your goals. Sign up today to
-            reserve your spot.
+            Sessions fill up around test dates, so sign up early to get paired
+            with a tutor. It takes about two minutes.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => setSignupOpen(true)}
-            className="bg-[#6D5CAE] text-white px-10 py-4 rounded-xl shadow-lg text-lg font-semibold"
+            className="bg-[#6D5CAE] text-white px-10 py-4 rounded-xl shadow-lg text-lg font-semibold hover:bg-[#5a4a99] transition-colors"
           >
             Sign Up for Free Tutoring
-          </motion.button>
+          </button>
         </section>
 
         <SATSignupModal

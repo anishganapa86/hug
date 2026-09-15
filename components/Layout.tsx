@@ -126,14 +126,12 @@ export default function Layout({ children, onScrollToSection, className }: Props
               >
                 Login
               </Link>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={() => navigate("donate")}
-                className="bg-[#6D5CAE] text-white rounded-full px-5 py-1.5 text-sm font-medium shadow-sm"
+                className="bg-[#6D5CAE] text-white rounded-full px-5 py-1.5 text-sm font-medium shadow-sm hover:bg-[#5a4a99] transition-colors"
               >
-                Donate Now
-              </motion.button>
+                Donate
+              </button>
             </div>
 
             {/* Mobile hamburger */}
@@ -189,13 +187,12 @@ export default function Layout({ children, onScrollToSection, className }: Props
                     >
                       Login
                     </Link>
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
+                    <button
                       onClick={() => navigate("donate")}
                       className="bg-[#6D5CAE] text-white rounded-full px-4 py-2 font-medium text-center"
                     >
-                      Donate Now
-                    </motion.button>
+                      Donate
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -230,8 +227,8 @@ export default function Layout({ children, onScrollToSection, className }: Props
                 </span>
               </div>
               <p className="text-gray-600 leading-relaxed text-xs mb-4">
-                Empowering underserved communities in Henderson, NV through
-                education, wellness, and compassionate outreach.
+                A student-run non-profit in Henderson, NV. Hygiene packets,
+                clothing drives, and free SAT tutoring.
               </p>
               {/* 501c3 badge */}
               <span className="inline-block bg-purple-100 text-[#6D5CAE] text-xs font-medium px-3 py-1 rounded-full">
@@ -325,9 +322,7 @@ export default function Layout({ children, onScrollToSection, className }: Props
                   </button>
                 </li>
               </ul>
-              <p className="text-xs text-gray-500">
-                📍 Henderson, NV
-              </p>
+              <p className="text-xs text-gray-500">Henderson, Nevada</p>
             </div>
           </div>
 
