@@ -68,7 +68,7 @@ export default function SATTutoring() {
         <title>SAT Tutoring | HUG Foundation</title>
         <meta
           name="description"
-          content="Free, high-quality SAT tutoring for underprivileged students. Every tutor scored 1500+ on the SAT."
+          content="Free, high-quality SAT tutoring for underprivileged students. Breaking the income–score barrier with top tutors (1500+ scorers)."
         />
       </Head>
 
@@ -165,14 +165,13 @@ export default function SATTutoring() {
         <section className="px-6 md:px-20 py-20 space-panel backdrop-blur-sm">
           <h2 className="text-3xl font-bold text-center mb-4">
             Breaking the{" "}
-            <span className="text-[#6D5CAE]">Income-Score Barrier</span>
+            <span className="text-[#6D5CAE]">Income–Score Barrier</span>
           </h2>
           <p className="text-center text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            A private tutor in the valley runs $50 to $100 an hour, and prep
-            courses cost even more. Students whose families can afford that get
-            a head start; students whose families can&apos;t are left competing
-            against it. Our tutors scored 1500+ themselves and volunteer their
-            time, so our students get the same prep without the price tag.
+            Studies show a clear correlation between household income and SAT
+            scores. Higher income often means access to costly prep classes and
+            private tutoring, leaving low-income students at a disadvantage. We
+            are here to change that narrative.
           </p>
         </section>
 
